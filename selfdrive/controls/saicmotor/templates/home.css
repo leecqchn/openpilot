@@ -1,0 +1,48 @@
+body {
+    background-color: antiquewhite;
+    font-size: 30px;
+    text-align: center;
+    color: #ea66a6;
+}
+
+#op {
+    margin-top: 200px;
+}
+
+#title {
+    font-size: 50px;
+    margin-top: 50px;
+}
+
+a {
+    text-decoration: none;
+}
+
+.upload {
+
+}
+
+.download {
+    color: #ea66a6;
+    margin-top: 50px;
+}
+
+@media (max-width: 1000px) {
+    #title {
+        font-size: 120px;
+        margin-top: 80px;
+        color: #45b97c;
+    }
+
+    .upload {
+        margin-top: 380px;
+        font-size: 100px;
+        color: #ea66a6;
+    }
+
+    .download {
+        color: blueviolet;
+        margin-top: 200px;
+        font-size: 100px;
+    }
+}

@@ -1,0 +1,15 @@
+<html>
+<head>
+    <title>添加成功</title>
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/upload_success.css') }}"/>
+    <style>
+
+    </style>
+</head>
+<div id="op">
+    <p id="tip">文件 {{ filename }} 添加成功</p>
+    <p class="back">
+        <a href="{{ url_for('home') }}">back home</a>
+    </p>
+</div>
+</html>

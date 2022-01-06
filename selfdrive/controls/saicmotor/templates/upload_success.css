@@ -1,0 +1,27 @@
+body {
+    color: blueviolet;
+    background-color: #A0EEE1;
+    text-align: center;
+    font-size: 40px;
+}
+
+#op {
+    margin-top: 280px;
+}
+
+a {
+    color: #ea66a6;
+    text-decoration: none;
+}
+
+.back {
+    font-size: 90px;
+    margin-top: 170px;
+}
+
+@media (max-width: 1000px) {
+   #back-div{
+       font-size: 80px;
+       margin-top: 200px;
+   }
+}

@@ -1,0 +1,17 @@
+<html>
+<head>
+    <title>首页</title>
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}"/>
+</head>
+<div>
+    <p id="title">ftp功能小网站</p>
+</div>
+<div id="op">
+    <p class="upload">
+        <a href="{{ url_for('upload_file') }}">upload_file</a>
+    </p>
+    <p class="download">
+        <a href="{{ url_for('download_page') }}">download_page</a>
+    </p>
+</div>
+</html>

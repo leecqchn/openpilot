@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript" src="./js/coder_app.js"></script>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="./rtwreport_utils.js"></script>
+<script type="text/javascript" src="./rtwannotate.js"></script>
+<link rel="stylesheet" type="text/css" href="./css/coder_app.css"/>
+</head>
+<body onload="srcFileOnload();">
+<pre id="code">
+<table class="code" id="codeTbl">
+<tr name="1" id="1">
+<td><a id="l1" class='ln'>1</a></td><td><span class="ct">/*</span></td></tr>
+<tr name="2" id="2">
+<td><a id="l2" class='ln'>2</a></td><td><span class="ct"> * File: app_private.h</span></td></tr>
+<tr name="3" id="3">
+<td><a id="l3" class='ln'>3</a></td><td><span class="ct"> *</span></td></tr>
+<tr name="4" id="4">
+<td><a id="l4" class='ln'>4</a></td><td><span class="ct"> * Code generated for Simulink model 'app'.</span></td></tr>
+<tr name="5" id="5">
+<td><a id="l5" class='ln'>5</a></td><td><span class="ct"> *</span></td></tr>
+<tr name="6" id="6">
+<td><a id="l6" class='ln'>6</a></td><td><span class="ct"> * Model version                  : 5.19</span></td></tr>
+<tr name="7" id="7">
+<td><a id="l7" class='ln'>7</a></td><td><span class="ct"> * Simulink Coder version         : 9.4 (R2020b) 29-Jul-2020</span></td></tr>
+<tr name="8" id="8">
+<td><a id="l8" class='ln'>8</a></td><td><span class="ct"> * C/C++ source code generated on : Fri Dec  3 19:27:36 2021</span></td></tr>
+<tr name="9" id="9">
+<td><a id="l9" class='ln'>9</a></td><td><span class="ct"> *</span></td></tr>
+<tr name="10" id="10">
+<td><a id="l10" class='ln'>10</a></td><td><span class="ct"> * Target selection: ert.tlc</span></td></tr>
+<tr name="11" id="11">
+<td><a id="l11" class='ln'>11</a></td><td><span class="ct"> * Embedded hardware selection: ARM Compatible-&gt;ARM Cortex-A</span></td></tr>
+<tr name="12" id="12">
+<td><a id="l12" class='ln'>12</a></td><td><span class="ct"> * Code generation objectives: Unspecified</span></td></tr>
+<tr name="13" id="13">
+<td><a id="l13" class='ln'>13</a></td><td><span class="ct"> * Validation result: Not run</span></td></tr>
+<tr name="14" id="14">
+<td><a id="l14" class='ln'>14</a></td><td><span class="ct"> */</span></td></tr>
+<tr name="15" id="15">
+<td><a id="l15" class='ln'>15</a></td><td></td></tr>
+<tr name="16" id="16">
+<td><a id="l16" class='ln'>16</a></td><td><span class="pp">#ifndef</span> <a id="16c9" class="tk">RTW_HEADER_app_private_h_</a></td></tr>
+<tr name="17" id="17">
+<td><a id="l17" class='ln'>17</a></td><td><span class="pp">#define</span> <a id="17c9" class="tk">RTW_HEADER_app_private_h_</a></td></tr>
+<tr name="18" id="18">
+<td><a id="l18" class='ln'>18</a></td><td><span class="pp">#include "rtwtypes.h"</span></td></tr>
+<tr name="19" id="19">
+<td><a id="l19" class='ln'>19</a></td><td><span class="pp">#include "zero_crossing_types.h"</span></td></tr>
+<tr name="20" id="20">
+<td><a id="l20" class='ln'>20</a></td><td><span class="pp">#include "app.h"</span></td></tr>
+<tr name="21" id="21">
+<td><a id="l21" class='ln'>21</a></td><td></td></tr>
+<tr name="22" id="22">
+<td><a id="l22" class='ln'>22</a></td><td><span class="kw">extern</span> <a id="22c8" class="tk">real_T</a> <a id="22c15" class="tk">rt_powd_snf</a>(<a id="22c27" class="tk">real_T</a> <a id="22c34" class="tk">u0</a>, <a id="22c38" class="tk">real_T</a> <a id="22c45" class="tk">u1</a>);</td></tr>
+<tr name="23" id="23">
+<td><a id="l23" class='ln'>23</a></td><td><span class="kw">void</span> <a id="23c6" class="tk">BINARYSEARCH_real32_T</a>(<a id="23c28" class="tk">uint32_T</a> <a id="23c37" class="tk">*</a><a id="23c38" class="tk">piLeft</a>, <a id="23c46" class="tk">uint32_T</a> <a id="23c55" class="tk">*</a><a id="23c56" class="tk">piRght</a>, <a id="23c64" class="tk">real32_T</a> <a id="23c73" class="tk">u</a>, <span class="kw">const</span></td></tr>
+<tr name="24" id="24">
+<td><a id="l24" class='ln'>24</a></td><td>  <a id="24c3" class="tk">real32_T</a> <a id="24c12" class="tk">*</a><a id="24c13" class="tk">pData</a>, <a id="24c20" class="tk">uint32_T</a> <a id="24c29" class="tk">iHi</a>);</td></tr>
+<tr name="25" id="25">
+<td><a id="l25" class='ln'>25</a></td><td><span class="kw">void</span> <a id="25c6" class="tk">LookUp_real32_T_real32_T</a>(<a id="25c31" class="tk">real32_T</a> <a id="25c40" class="tk">*</a><a id="25c41" class="tk">pY</a>, <span class="kw">const</span> <a id="25c51" class="tk">real32_T</a> <a id="25c60" class="tk">*</a><a id="25c61" class="tk">pYData</a>, <a id="25c69" class="tk">real32_T</a> <a id="25c78" class="tk">u</a>,</td></tr>
+<tr name="26" id="26">
+<td><a id="l26" class='ln'>26</a></td><td>  <span class="kw">const</span> <a id="26c9" class="tk">real32_T</a> <a id="26c18" class="tk">*</a><a id="26c19" class="tk">pUData</a>, <a id="26c27" class="tk">uint32_T</a> <a id="26c36" class="tk">iHi</a>);</td></tr>
+<tr name="27" id="27">
+<td><a id="l27" class='ln'>27</a></td><td><span class="kw">extern</span> <a id="27c8" class="tk">real32_T</a> <a id="27c17" class="tk">look1_iflf_binlxpw</a>(<a id="27c36" class="tk">real32_T</a> <a id="27c45" class="tk">u0</a>, <span class="kw">const</span> <a id="27c55" class="tk">real32_T</a> <a id="27c64" class="tk">bp0</a>[], <span class="kw">const</span></td></tr>
+<tr name="28" id="28">
+<td><a id="l28" class='ln'>28</a></td><td>  <a id="28c3" class="tk">real32_T</a> <a id="28c12" class="tk">table</a>[], <a id="28c21" class="tk">uint32_T</a> <a id="28c30" class="tk">maxIndex</a>);</td></tr>
+<tr name="29" id="29">
+<td><a id="l29" class='ln'>29</a></td><td><span class="kw">extern</span> <a id="29c8" class="tk">real32_T</a> <a id="29c17" class="tk">look1_iflf_binlcapw</a>(<a id="29c37" class="tk">real32_T</a> <a id="29c46" class="tk">u0</a>, <span class="kw">const</span> <a id="29c56" class="tk">real32_T</a> <a id="29c65" class="tk">bp0</a>[], <span class="kw">const</span></td></tr>
+<tr name="30" id="30">
+<td><a id="l30" class='ln'>30</a></td><td>  <a id="30c3" class="tk">real32_T</a> <a id="30c12" class="tk">table</a>[], <a id="30c21" class="tk">uint32_T</a> <a id="30c30" class="tk">maxIndex</a>);</td></tr>
+<tr name="31" id="31">
+<td><a id="l31" class='ln'>31</a></td><td><span class="kw">extern</span> <a id="31c8" class="tk">real32_T</a> <a id="31c17" class="tk">look1_iflf_binlcpw</a>(<a id="31c36" class="tk">real32_T</a> <a id="31c45" class="tk">u0</a>, <span class="kw">const</span> <a id="31c55" class="tk">real32_T</a> <a id="31c64" class="tk">bp0</a>[], <span class="kw">const</span></td></tr>
+<tr name="32" id="32">
+<td><a id="l32" class='ln'>32</a></td><td>  <a id="32c3" class="tk">real32_T</a> <a id="32c12" class="tk">table</a>[], <a id="32c21" class="tk">uint32_T</a> <a id="32c30" class="tk">maxIndex</a>);</td></tr>
+<tr name="33" id="33">
+<td><a id="l33" class='ln'>33</a></td><td><span class="kw">extern</span> <a id="33c8" class="tk">real32_T</a> <a id="33c17" class="tk">look2_iflf_binlxpw</a>(<a id="33c36" class="tk">real32_T</a> <a id="33c45" class="tk">u0</a>, <a id="33c49" class="tk">real32_T</a> <a id="33c58" class="tk">u1</a>, <span class="kw">const</span> <a id="33c68" class="tk">real32_T</a> <a id="33c77" class="tk">bp0</a>[],</td></tr>
+<tr name="34" id="34">
+<td><a id="l34" class='ln'>34</a></td><td>  <span class="kw">const</span> <a id="34c9" class="tk">real32_T</a> <a id="34c18" class="tk">bp1</a>[], <span class="kw">const</span> <a id="34c31" class="tk">real32_T</a> <a id="34c40" class="tk">table</a>[], <span class="kw">const</span> <a id="34c55" class="tk">uint32_T</a> <a id="34c64" class="tk">maxIndex</a>[],</td></tr>
+<tr name="35" id="35">
+<td><a id="l35" class='ln'>35</a></td><td>  <a id="35c3" class="tk">uint32_T</a> <a id="35c12" class="tk">stride</a>);</td></tr>
+<tr name="36" id="36">
+<td><a id="l36" class='ln'>36</a></td><td><span class="kw">extern</span> <span class="kw">void</span> <a id="36c13" class="tk">app_Chart3_Init</a>(<a id="36c29" class="tk">DW_Chart3_app_T</a> <a id="36c45" class="tk">*</a><a id="36c46" class="tk">localDW</a>);</td></tr>
+<tr name="37" id="37">
+<td><a id="l37" class='ln'>37</a></td><td><span class="kw">extern</span> <span class="kw">void</span> <a id="37c13" class="tk">app_Chart3</a>(<a id="37c24" class="tk">boolean_T</a> <a id="37c34" class="tk">rtu_strLmpSig</a>, <a id="37c49" class="tk">boolean_T</a> <a id="37c59" class="tk">*</a><a id="37c60" class="tk">rty_is_steerLampOn_bl</a>,</td></tr>
+<tr name="38" id="38">
+<td><a id="l38" class='ln'>38</a></td><td>  <a id="38c3" class="tk">DW_Chart3_app_T</a> <a id="38c19" class="tk">*</a><a id="38c20" class="tk">localDW</a>);</td></tr>
+<tr name="39" id="39">
+<td><a id="l39" class='ln'>39</a></td><td><span class="kw">extern</span> <span class="kw">void</span> <a id="39c13" class="tk">app_Chart_Init</a>(<a id="39c28" class="tk">uint8_T</a> <a id="39c36" class="tk">*</a><a id="39c37" class="tk">rty_count</a>);</td></tr>
+<tr name="40" id="40">
+<td><a id="l40" class='ln'>40</a></td><td><span class="kw">extern</span> <span class="kw">void</span> <a id="40c13" class="tk">app_Chart</a>(<a id="40c23" class="tk">uint8_T</a> <a id="40c31" class="tk">*</a><a id="40c32" class="tk">rty_count</a>);</td></tr>
+<tr name="41" id="41">
+<td><a id="l41" class='ln'>41</a></td><td><span class="kw">extern</span> <span class="kw">void</span> <a id="41c13" class="tk">app_Chart4_Init</a>(<a id="41c29" class="tk">DW_Chart4_app_T</a> <a id="41c45" class="tk">*</a><a id="41c46" class="tk">localDW</a>);</td></tr>
+<tr name="42" id="42">
+<td><a id="l42" class='ln'>42</a></td><td><span class="kw">extern</span> <span class="kw">void</span> <a id="42c13" class="tk">app_Chart4</a>(<a id="42c24" class="tk">boolean_T</a> <a id="42c34" class="tk">rtu_in_cond</a>, <a id="42c47" class="tk">real32_T</a> <a id="42c56" class="tk">rtu_loop_time</a>, <a id="42c71" class="tk">real32_T</a></td></tr>
+<tr name="43" id="43">
+<td><a id="l43" class='ln'>43</a></td><td>  <a id="43c3" class="tk">rtu_rise_time</a>, <a id="43c18" class="tk">real32_T</a> <a id="43c27" class="tk">rtu_fall_time</a>, <a id="43c42" class="tk">boolean_T</a> <a id="43c52" class="tk">*</a><a id="43c53" class="tk">rty_out_cond</a>,</td></tr>
+<tr name="44" id="44">
+<td><a id="l44" class='ln'>44</a></td><td>  <a id="44c3" class="tk">DW_Chart4_app_T</a> <a id="44c19" class="tk">*</a><a id="44c20" class="tk">localDW</a>);</td></tr>
+<tr name="45" id="45">
+<td><a id="l45" class='ln'>45</a></td><td><span class="kw">extern</span> <span class="kw">void</span> <a id="45c13" class="tk">app_Chart1</a>(<a id="45c24" class="tk">boolean_T</a> <a id="45c34" class="tk">rtu_Arb_is_LatCtrlActv_bl</a>, <a id="45c61" class="tk">boolean_T</a></td></tr>
+<tr name="46" id="46">
+<td><a id="l46" class='ln'>46</a></td><td>  <a id="46c3" class="tk">rtu_lane_cond</a>, <a id="46c18" class="tk">uint8_T</a> <a id="46c26" class="tk">*</a><a id="46c27" class="tk">rty_out_cond</a>);</td></tr>
+<tr name="47" id="47">
+<td><a id="l47" class='ln'>47</a></td><td><span class="kw">extern</span> <span class="kw">void</span> <a id="47c13" class="tk">app_Chart_a_Init</a>(<a id="47c30" class="tk">uint8_T</a> <a id="47c38" class="tk">rty_msg</a>[64]);</td></tr>
+<tr name="48" id="48">
+<td><a id="l48" class='ln'>48</a></td><td><span class="kw">extern</span> <span class="kw">void</span> <a id="48c13" class="tk">app_Chart_p</a>(<a id="48c25" class="tk">uint8_T</a> <a id="48c33" class="tk">rtu_signal_len</a>, <a id="48c49" class="tk">uint8_T</a> <a id="48c57" class="tk">rtu_start_bit</a>, <a id="48c72" class="tk">uint32_T</a></td></tr>
+<tr name="49" id="49">
+<td><a id="l49" class='ln'>49</a></td><td>  <a id="49c3" class="tk">rtu_signal_raw</a>, <span class="kw">const</span> <a id="49c25" class="tk">uint8_T</a> <a id="49c33" class="tk">rtu_msg_in</a>[64], <a id="49c49" class="tk">uint8_T</a> <a id="49c57" class="tk">rty_msg</a>[64]);</td></tr>
+<tr name="50" id="50">
+<td><a id="l50" class='ln'>50</a></td><td><span class="kw">extern</span> <span class="kw">void</span> <a id="50c13" class="tk">app_Chart_c_Init</a>(<a id="50c30" class="tk">uint8_T</a> <a id="50c38" class="tk">rty_msg</a>[64]);</td></tr>
+<tr name="51" id="51">
+<td><a id="l51" class='ln'>51</a></td><td><span class="kw">extern</span> <span class="kw">void</span> <a id="51c13" class="tk">app_Chart_h</a>(<a id="51c25" class="tk">uint8_T</a> <a id="51c33" class="tk">rtu_signal_len</a>, <a id="51c49" class="tk">uint8_T</a> <a id="51c57" class="tk">rtu_start_bit</a>, <a id="51c72" class="tk">uint32_T</a></td></tr>
+<tr name="52" id="52">
+<td><a id="l52" class='ln'>52</a></td><td>  <a id="52c3" class="tk">rtu_signal_raw</a>, <span class="kw">const</span> <a id="52c25" class="tk">uint8_T</a> <a id="52c33" class="tk">rtu_msg_in</a>[64], <a id="52c49" class="tk">uint8_T</a> <a id="52c57" class="tk">rty_msg</a>[64]);</td></tr>
+<tr name="53" id="53">
+<td><a id="l53" class='ln'>53</a></td><td><span class="kw">extern</span> <span class="kw">void</span> <a id="53c13" class="tk">app_Planner</a>(<span class="kw">const</span> <a id="53c31" class="tk">real32_T</a> <a id="53c40" class="tk">rtu_initial_lateral_status</a>[3], <a id="53c71" class="tk">real32_T</a></td></tr>
+<tr name="54" id="54">
+<td><a id="l54" class='ln'>54</a></td><td>  <a id="54c3" class="tk">rty_y_cof</a>[7], <a id="54c17" class="tk">B_Planner_app_T</a> <a id="54c33" class="tk">*</a><a id="54c34" class="tk">localB</a>, <span class="kw">const</span> <a id="54c48" class="tk">ConstB_Planner_app_T</a> <a id="54c69" class="tk">*</a><a id="54c70" class="tk">localC</a>);</td></tr>
+<tr name="55" id="55">
+<td><a id="l55" class='ln'>55</a></td><td><span class="kw">extern</span> <span class="kw">void</span> <a id="55c13" class="tk">app_Chart_ah_Init</a>(<a id="55c31" class="tk">DW_Chart_app_f_T</a> <a id="55c48" class="tk">*</a><a id="55c49" class="tk">localDW</a>);</td></tr>
+<tr name="56" id="56">
+<td><a id="l56" class='ln'>56</a></td><td><span class="kw">extern</span> <span class="kw">void</span> <a id="56c13" class="tk">app_Chart_o</a>(<a id="56c25" class="tk">boolean_T</a> <a id="56c35" class="tk">rtu_Arb_is_LatCtrlActv_bl</a>, <a id="56c62" class="tk">real32_T</a></td></tr>
+<tr name="57" id="57">
+<td><a id="l57" class='ln'>57</a></td><td>  <a id="57c3" class="tk">*</a><a id="57c4" class="tk">rty_ramp_cof</a>, <a id="57c18" class="tk">DW_Chart_app_f_T</a> <a id="57c35" class="tk">*</a><a id="57c36" class="tk">localDW</a>);</td></tr>
+<tr name="58" id="58">
+<td><a id="l58" class='ln'>58</a></td><td></td></tr>
+<tr name="59" id="59">
+<td><a id="l59" class='ln'>59</a></td><td><span class="pp">#endif</span>                                 <span class="ct">/* RTW_HEADER_app_private_h_ */</span></td></tr>
+<tr name="60" id="60">
+<td><a id="l60" class='ln'>60</a></td><td></td></tr>
+<tr name="61" id="61">
+<td><a id="l61" class='ln'>61</a></td><td><span class="ct">/*</span></td></tr>
+<tr name="62" id="62">
+<td><a id="l62" class='ln'>62</a></td><td><span class="ct"> * File trailer for generated code.</span></td></tr>
+<tr name="63" id="63">
+<td><a id="l63" class='ln'>63</a></td><td><span class="ct"> *</span></td></tr>
+<tr name="64" id="64">
+<td><a id="l64" class='ln'>64</a></td><td><span class="ct"> * [EOF]</span></td></tr>
+<tr name="65" id="65">
+<td><a id="l65" class='ln'>65</a></td><td><span class="ct"> */</span></td></tr>
+<tr name="66" id="66">
+<td><a id="l66" class='ln'>66</a></td><td></td></tr>
+</table>
+</pre>
+</body>
+</html>

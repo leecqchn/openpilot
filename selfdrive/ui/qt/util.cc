@@ -8,12 +8,21 @@
 #include "selfdrive/common/swaglog.h"
 #include "selfdrive/hardware/hw.h"
 
+QString getVersion() {
+  static QString version =  QString::fromStdString(Params().get("Version"));
+  return version;
+}
+
 QString getBrand() {
   return Params().getBool("Passive") ? "dashcam" : "openpilot";
 }
 
 QString getBrandVersion() {
-  return getBrand() + " v" + QString::fromStdString(Params().get("Version")).left(14).trimmed();
+  return getBrand() + " v" + getVersion().left(14).trimmed();
+}
+
+QString getUserAgent() {
+  return "openpilot-" + getVersion();
 }
 
 std::optional<QString> getDongleId() {
@@ -76,6 +85,7 @@ void setQtSurfaceFormat() {
 #else
   fmt.setRenderableType(QSurfaceFormat::OpenGLES);
 #endif
+  fmt.setSamples(16);
   QSurfaceFormat::setDefaultFormat(fmt);
 }
 
@@ -105,12 +115,12 @@ void ClickableWidget::paintEvent(QPaintEvent *) {
 
 void swagLogMessageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg) {
   static std::map<QtMsgType, int> levels = {
-    {QtMsgType::QtDebugMsg, 10},
-    {QtMsgType::QtInfoMsg, 20},
-    {QtMsgType::QtWarningMsg, 30},
-    {QtMsgType::QtCriticalMsg, 40},
-    {QtMsgType::QtSystemMsg, 40},
-    {QtMsgType::QtFatalMsg, 50},
+    {QtMsgType::QtDebugMsg, CLOUDLOG_DEBUG},
+    {QtMsgType::QtInfoMsg, CLOUDLOG_INFO},
+    {QtMsgType::QtWarningMsg, CLOUDLOG_WARNING},
+    {QtMsgType::QtCriticalMsg, CLOUDLOG_ERROR},
+    {QtMsgType::QtSystemMsg, CLOUDLOG_ERROR},
+    {QtMsgType::QtFatalMsg, CLOUDLOG_CRITICAL},
   };
 
   std::string file, function;
@@ -119,4 +129,10 @@ void swagLogMessageHandler(QtMsgType type, const QMessageLogContext &context, co
 
   auto bts = msg.toUtf8();
   cloudlog_e(levels[type], file.c_str(), context.line, function.c_str(), "%s", bts.constData());
+}
+
+
+QWidget* topWidget (QWidget* widget) {
+  while (widget->parentWidget() != nullptr) widget=widget->parentWidget();
+  return widget;
 }

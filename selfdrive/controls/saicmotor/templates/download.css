@@ -1,0 +1,45 @@
+body {
+    text-align: center;
+    font-size: 30px;
+    background: #A0EEE1;
+}
+
+a {
+    text-decoration: none;
+}
+
+
+.title {
+    color: #ea66a6;
+}
+
+.back {
+    font-size: 26px;
+    margin-left: 16vw;
+    position: fixed;
+    bottom: 30px;
+    color: #ea66a6;
+}
+
+@media (max-width: 1000px) {
+    .title {
+        color: #ea66a6;
+        font-size: 120px;
+    }
+
+    ul {
+        text-align: left;
+        font-size: 6vw;
+    }
+
+    li {
+        margin-top: 40px;
+    }
+
+    .back {
+        position: fixed;
+        bottom: 30px;
+        margin-left: 10vw;
+        font-size: 70px;
+    }
+}

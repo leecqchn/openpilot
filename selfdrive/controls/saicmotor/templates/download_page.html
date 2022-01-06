@@ -1,0 +1,21 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>下载文件页面</title>
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/download.css') }}"/>
+</head>
+<body>
+<div id="main">
+    <h2 class="title">可供下载的文件</h2>
+    <ul>
+        {% for file in fl %}
+{#            <li><a href="/download_file?filename={{ file }}">  {{ file }} </a></li>#}
+            <li><a href="{{url_for('download_file', filename=file)}}">  {{ file }} </a></li>
+        {% endfor %}
+    </ul>
+<p class="back">
+    <a href="{{ url_for('home') }}">back home</a>
+</p>
+</div>
+</body>
+</html>

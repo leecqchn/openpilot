@@ -1,0 +1,1461 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><link rel="stylesheet" type="text/css" href="rtwreport.css" /><script language="JavaScript" type="text/javascript">function rtwTableShrink(o) {var t = o.nextSibling;if (t.nodeType != 1) {t = t.nextSibling;}if (t.style.display == "none") {t.style.display = "";o.innerHTML = "[-]"} else {t.style.display = "none";o.innerHTML = "[+] ... "}}</script><script language="JavaScript" type="text/javascript" src="rtwreport_utils.js"></script><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>
+Code Interface Report for app
+</title>
+
+</head>
+<body ONLOAD="try {if (top) {if (top.rtwPageOnLoad) top.rtwPageOnLoad('rtwIdCodeInterface'); else local_onload();}} catch(err) {};">
+<h1>
+Code Interface Report for app
+</h1>
+<h3>
+Table of Contents
+</h3>
+<ul>
+<li>
+<a href="#sec_Entry-Point_Functions">
+Entry-Point Functions
+</a>
+
+</li>
+<li>
+<a href="#sec_Inports">
+Inports
+</a>
+
+</li>
+<li>
+<a href="#sec_Outports">
+Outports
+</a>
+
+</li>
+<li>
+<a href="#sec_Interface_Parameters">
+Interface Parameters
+</a>
+
+</li>
+<li>
+<a href="#sec_Data_Stores">
+Data Stores
+</a>
+
+</li>
+
+</ul>
+<h3>
+<a name="sec_Entry-Point_Functions">
+Entry-Point Functions
+</a>
+
+</h3>
+<p>
+Function: <a href="app_c.html#fcn_app_initialize">app_initialize</a>
+</p>
+<table width="100%" class="AltRow" cellspacing="0">
+<tr class="even">
+<td width="25%" align="left" valign="top">
+Prototype
+</td>
+<td width="75%" align="left" valign="top">
+<b>
+void app_initialize(void)
+</b>
+
+</td>
+
+</tr>
+<tr class="odd">
+<td width="25%" align="left" valign="top">
+Description
+</td>
+<td width="75%" align="left" valign="top">
+Initialization entry point of generated code
+</td>
+
+</tr>
+<tr class="even">
+<td width="25%" align="left" valign="top">
+Timing
+</td>
+<td width="75%" align="left" valign="top">
+Must be called exactly once
+</td>
+
+</tr>
+<tr class="odd">
+<td width="25%" align="left" valign="top">
+Arguments
+</td>
+<td width="75%" align="left" valign="top">
+None
+</td>
+
+</tr>
+<tr class="even">
+<td width="25%" align="left" valign="top">
+Return value
+</td>
+<td width="75%" align="left" valign="top">
+None
+</td>
+
+</tr>
+<tr class="odd">
+<td width="25%" align="left" valign="top">
+Header file
+</td>
+<td width="75%" align="left" valign="top">
+<a href="app_h.html">app.h</a>
+</td>
+
+</tr>
+
+</table>
+<p>
+Function: <a href="app_c.html#fcn_app_step">app_step</a>
+</p>
+<table width="100%" class="AltRow" cellspacing="0">
+<tr class="even">
+<td width="25%" align="left" valign="top">
+Prototype
+</td>
+<td width="75%" align="left" valign="top">
+<b>
+void app_step(uint8_T arg_can_492[8], uint8_T arg_can_251[8], uint8_T arg_can_355[8], uint8_T arg_can_489[8], uint8_T arg_can_201[8], uint8_T arg_can_1130[8], uint8_T arg_can_886[8], uint8_T arg_can_901[8], uint8_T arg_can_532[8], uint8_T arg_can_485[8], uint8_T arg_can_851[8], uint8_T arg_can_540[8], uint8_T arg_can_758[8], uint8_T arg_can_404[8], uint8_T arg_can_481[8], uint8_T arg_can_389[8], uint8_T arg_can_593[8], uint8_T arg_can_516[8], real32_T arg_lateralPlan_laneWidth, real32_T arg_lateralPlan_lProb, real32_T arg_lateralPlan_rProb, real32_T arg_lateralPlan_dProb, real32_T arg_lateralPlan_rawCurvature, real32_T arg_lateralPlan_rawCurvatureRate, real32_T arg_lateralPlan_curvature, real32_T arg_lateralPlan_curvatureRate, real32_T arg_lateralPlan_pathCof_C3, real32_T arg_lateralPlan_pathCof_C2, real32_T arg_lateralPlan_pathCof_C1, real32_T arg_lateralPlan_pathCof_C0, boolean_T arg_lateralPlan_valid, boolean_T arg_lateralPlan_ctrlType, real32_T arg_lateralPlan_yPts[17], real32_T arg_lateralPlan_headPts[17])
+</b>
+
+</td>
+
+</tr>
+<tr class="odd">
+<td width="25%" align="left" valign="top">
+Description
+</td>
+<td width="75%" align="left" valign="top">
+Output entry point of generated code
+</td>
+
+</tr>
+<tr class="even">
+<td width="25%" align="left" valign="top">
+Timing
+</td>
+<td width="75%" align="left" valign="top">
+Must be called periodically, every 0.02 seconds
+</td>
+
+</tr>
+<tr class="odd">
+<td width="25%" align="left" valign="top">
+Arguments
+</td>
+<td width="75%" align="left" valign="top">
+<span title="Click to shrink or expand table" onclick="rtwTableShrink(this)">[-]</span><table class="AltRow FirstColumn" cellspacing="0">
+<tr class="heading">
+<th align="left" valign="top">
+<b>
+#
+</b>
+
+</th>
+<th align="left" valign="top">
+<b>
+Name
+</b>
+
+</th>
+<th align="left" valign="top">
+<b>
+Data Type
+</b>
+
+</th>
+<th align="left" valign="top">
+<b>
+Description
+</b>
+
+</th>
+
+</tr>
+<tr class="even">
+<td align="right" valign="top">
+1
+</td>
+<td align="left" valign="top">
+arg_can_492
+</td>
+<td align="left" valign="top">
+uint8_T
+</td>
+<td align="left" valign="top">
+<a href="matlab:coder.internal.code2model('app:16457')" name="code2model" class="code2model">&lt;Root&gt;/can_492</a>
+</td>
+
+</tr>
+<tr class="odd">
+<td align="right" valign="top">
+2
+</td>
+<td align="left" valign="top">
+arg_can_251
+</td>
+<td align="left" valign="top">
+uint8_T
+</td>
+<td align="left" valign="top">
+<a href="matlab:coder.internal.code2model('app:16458')" name="code2model" class="code2model">&lt;Root&gt;/can_251</a>
+</td>
+
+</tr>
+<tr class="even">
+<td align="right" valign="top">
+3
+</td>
+<td align="left" valign="top">
+arg_can_355
+</td>
+<td align="left" valign="top">
+uint8_T
+</td>
+<td align="left" valign="top">
+<a href="matlab:coder.internal.code2model('app:16459')" name="code2model" class="code2model">&lt;Root&gt;/can_355</a>
+</td>
+
+</tr>
+<tr class="odd">
+<td align="right" valign="top">
+4
+</td>
+<td align="left" valign="top">
+arg_can_489
+</td>
+<td align="left" valign="top">
+uint8_T
+</td>
+<td align="left" valign="top">
+<a href="matlab:coder.internal.code2model('app:16460')" name="code2model" class="code2model">&lt;Root&gt;/can_489</a>
+</td>
+
+</tr>
+<tr class="even">
+<td align="right" valign="top">
+5
+</td>
+<td align="left" valign="top">
+arg_can_201
+</td>
+<td align="left" valign="top">
+uint8_T
+</td>
+<td align="left" valign="top">
+<a href="matlab:coder.internal.code2model('app:16461')" name="code2model" class="code2model">&lt;Root&gt;/can_201</a>
+</td>
+
+</tr>
+<tr class="odd">
+<td align="right" valign="top">
+6
+</td>
+<td align="left" valign="top">
+arg_can_1130
+</td>
+<td align="left" valign="top">
+uint8_T
+</td>
+<td align="left" valign="top">
+<a href="matlab:coder.internal.code2model('app:16462')" name="code2model" class="code2model">&lt;Root&gt;/can_1130</a>
+</td>
+
+</tr>
+<tr class="even">
+<td align="right" valign="top">
+7
+</td>
+<td align="left" valign="top">
+arg_can_886
+</td>
+<td align="left" valign="top">
+uint8_T
+</td>
+<td align="left" valign="top">
+<a href="matlab:coder.internal.code2model('app:16463')" name="code2model" class="code2model">&lt;Root&gt;/can_886</a>
+</td>
+
+</tr>
+<tr class="odd">
+<td align="right" valign="top">
+8
+</td>
+<td align="left" valign="top">
+arg_can_901
+</td>
+<td align="left" valign="top">
+uint8_T
+</td>
+<td align="left" valign="top">
+<a href="matlab:coder.internal.code2model('app:16464')" name="code2model" class="code2model">&lt;Root&gt;/can_901</a>
+</td>
+
+</tr>
+<tr class="even">
+<td align="right" valign="top">
+9
+</td>
+<td align="left" valign="top">
+arg_can_532
+</td>
+<td align="left" valign="top">
+uint8_T
+</td>
+<td align="left" valign="top">
+<a href="matlab:coder.internal.code2model('app:16465')" name="code2model" class="code2model">&lt;Root&gt;/can_532</a>
+</td>
+
+</tr>
+<tr class="odd">
+<td align="right" valign="top">
+10
+</td>
+<td align="left" valign="top">
+arg_can_485
+</td>
+<td align="left" valign="top">
+uint8_T
+</td>
+<td align="left" valign="top">
+<a href="matlab:coder.internal.code2model('app:16466')" name="code2model" class="code2model">&lt;Root&gt;/can_485</a>
+</td>
+
+</tr>
+<tr class="even">
+<td align="right" valign="top">
+11
+</td>
+<td align="left" valign="top">
+arg_can_851
+</td>
+<td align="left" valign="top">
+uint8_T
+</td>
+<td align="left" valign="top">
+<a href="matlab:coder.internal.code2model('app:16467')" name="code2model" class="code2model">&lt;Root&gt;/can_851</a>
+</td>
+
+</tr>
+<tr class="odd">
+<td align="right" valign="top">
+12
+</td>
+<td align="left" valign="top">
+arg_can_540
+</td>
+<td align="left" valign="top">
+uint8_T
+</td>
+<td align="left" valign="top">
+<a href="matlab:coder.internal.code2model('app:16468')" name="code2model" class="code2model">&lt;Root&gt;/can_540</a>
+</td>
+
+</tr>
+<tr class="even">
+<td align="right" valign="top">
+13
+</td>
+<td align="left" valign="top">
+arg_can_758
+</td>
+<td align="left" valign="top">
+uint8_T
+</td>
+<td align="left" valign="top">
+<a href="matlab:coder.internal.code2model('app:16469')" name="code2model" class="code2model">&lt;Root&gt;/can_758</a>
+</td>
+
+</tr>
+<tr class="odd">
+<td align="right" valign="top">
+14
+</td>
+<td align="left" valign="top">
+arg_can_404
+</td>
+<td align="left" valign="top">
+uint8_T
+</td>
+<td align="left" valign="top">
+<a href="matlab:coder.internal.code2model('app:16470')" name="code2model" class="code2model">&lt;Root&gt;/can_404</a>
+</td>
+
+</tr>
+<tr class="even">
+<td align="right" valign="top">
+15
+</td>
+<td align="left" valign="top">
+arg_can_481
+</td>
+<td align="left" valign="top">
+uint8_T
+</td>
+<td align="left" valign="top">
+<a href="matlab:coder.internal.code2model('app:16471')" name="code2model" class="code2model">&lt;Root&gt;/can_481</a>
+</td>
+
+</tr>
+<tr class="odd">
+<td align="right" valign="top">
+16
+</td>
+<td align="left" valign="top">
+arg_can_389
+</td>
+<td align="left" valign="top">
+uint8_T
+</td>
+<td align="left" valign="top">
+<a href="matlab:coder.internal.code2model('app:16472')" name="code2model" class="code2model">&lt;Root&gt;/can_389</a>
+</td>
+
+</tr>
+<tr class="even">
+<td align="right" valign="top">
+17
+</td>
+<td align="left" valign="top">
+arg_can_593
+</td>
+<td align="left" valign="top">
+uint8_T
+</td>
+<td align="left" valign="top">
+<a href="matlab:coder.internal.code2model('app:16473')" name="code2model" class="code2model">&lt;Root&gt;/can_593</a>
+</td>
+
+</tr>
+<tr class="odd">
+<td align="right" valign="top">
+18
+</td>
+<td align="left" valign="top">
+arg_can_516
+</td>
+<td align="left" valign="top">
+uint8_T
+</td>
+<td align="left" valign="top">
+<a href="matlab:coder.internal.code2model('app:16474')" name="code2model" class="code2model">&lt;Root&gt;/can_516</a>
+</td>
+
+</tr>
+<tr class="even">
+<td align="right" valign="top">
+19
+</td>
+<td align="left" valign="top">
+arg_lateralPlan_laneWidth
+</td>
+<td align="left" valign="top">
+real32_T
+</td>
+<td align="left" valign="top">
+<a href="matlab:coder.internal.code2model('app:16475')" name="code2model" class="code2model">&lt;Root&gt;/lateralPlan_laneWidth</a>
+</td>
+
+</tr>
+<tr class="odd">
+<td align="right" valign="top">
+20
+</td>
+<td align="left" valign="top">
+arg_lateralPlan_lProb
+</td>
+<td align="left" valign="top">
+real32_T
+</td>
+<td align="left" valign="top">
+<a href="matlab:coder.internal.code2model('app:16476')" name="code2model" class="code2model">&lt;Root&gt;/lateralPlan_lProb</a>
+</td>
+
+</tr>
+<tr class="even">
+<td align="right" valign="top">
+21
+</td>
+<td align="left" valign="top">
+arg_lateralPlan_rProb
+</td>
+<td align="left" valign="top">
+real32_T
+</td>
+<td align="left" valign="top">
+<a href="matlab:coder.internal.code2model('app:16477')" name="code2model" class="code2model">&lt;Root&gt;/lateralPlan_rProb</a>
+</td>
+
+</tr>
+<tr class="odd">
+<td align="right" valign="top">
+22
+</td>
+<td align="left" valign="top">
+arg_lateralPlan_dProb
+</td>
+<td align="left" valign="top">
+real32_T
+</td>
+<td align="left" valign="top">
+<a href="matlab:coder.internal.code2model('app:16478')" name="code2model" class="code2model">&lt;Root&gt;/lateralPlan_dProb</a>
+</td>
+
+</tr>
+<tr class="even">
+<td align="right" valign="top">
+23
+</td>
+<td align="left" valign="top">
+arg_lateralPlan_rawCurvature
+</td>
+<td align="left" valign="top">
+real32_T
+</td>
+<td align="left" valign="top">
+<a href="matlab:coder.internal.code2model('app:16479')" name="code2model" class="code2model">&lt;Root&gt;/lateralPlan_rawCurvature</a>
+</td>
+
+</tr>
+<tr class="odd">
+<td align="right" valign="top">
+24
+</td>
+<td align="left" valign="top">
+arg_lateralPlan_rawCurvatureRate
+</td>
+<td align="left" valign="top">
+real32_T
+</td>
+<td align="left" valign="top">
+<a href="matlab:coder.internal.code2model('app:16480')" name="code2model" class="code2model">&lt;Root&gt;/lateralPlan_rawCurvatureRate</a>
+</td>
+
+</tr>
+<tr class="even">
+<td align="right" valign="top">
+25
+</td>
+<td align="left" valign="top">
+arg_lateralPlan_curvature
+</td>
+<td align="left" valign="top">
+real32_T
+</td>
+<td align="left" valign="top">
+<a href="matlab:coder.internal.code2model('app:16481')" name="code2model" class="code2model">&lt;Root&gt;/lateralPlan_curvature</a>
+</td>
+
+</tr>
+<tr class="odd">
+<td align="right" valign="top">
+26
+</td>
+<td align="left" valign="top">
+arg_lateralPlan_curvatureRate
+</td>
+<td align="left" valign="top">
+real32_T
+</td>
+<td align="left" valign="top">
+<a href="matlab:coder.internal.code2model('app:16482')" name="code2model" class="code2model">&lt;Root&gt;/lateralPlan_curvatureRate</a>
+</td>
+
+</tr>
+<tr class="even">
+<td align="right" valign="top">
+27
+</td>
+<td align="left" valign="top">
+arg_lateralPlan_pathCof_C3
+</td>
+<td align="left" valign="top">
+real32_T
+</td>
+<td align="left" valign="top">
+<a href="matlab:coder.internal.code2model('app:18810')" name="code2model" class="code2model">&lt;Root&gt;/lateralPlan_pathCof_C3</a>
+</td>
+
+</tr>
+<tr class="odd">
+<td align="right" valign="top">
+28
+</td>
+<td align="left" valign="top">
+arg_lateralPlan_pathCof_C2
+</td>
+<td align="left" valign="top">
+real32_T
+</td>
+<td align="left" valign="top">
+<a href="matlab:coder.internal.code2model('app:18811')" name="code2model" class="code2model">&lt;Root&gt;/lateralPlan_pathCof_C2</a>
+</td>
+
+</tr>
+<tr class="even">
+<td align="right" valign="top">
+29
+</td>
+<td align="left" valign="top">
+arg_lateralPlan_pathCof_C1
+</td>
+<td align="left" valign="top">
+real32_T
+</td>
+<td align="left" valign="top">
+<a href="matlab:coder.internal.code2model('app:18812')" name="code2model" class="code2model">&lt;Root&gt;/lateralPlan_pathCof_C1</a>
+</td>
+
+</tr>
+<tr class="odd">
+<td align="right" valign="top">
+30
+</td>
+<td align="left" valign="top">
+arg_lateralPlan_pathCof_C0
+</td>
+<td align="left" valign="top">
+real32_T
+</td>
+<td align="left" valign="top">
+<a href="matlab:coder.internal.code2model('app:18813')" name="code2model" class="code2model">&lt;Root&gt;/lateralPlan_pathCof_C0</a>
+</td>
+
+</tr>
+<tr class="even">
+<td align="right" valign="top">
+31
+</td>
+<td align="left" valign="top">
+arg_lateralPlan_valid
+</td>
+<td align="left" valign="top">
+boolean_T
+</td>
+<td align="left" valign="top">
+<a href="matlab:coder.internal.code2model('app:16483')" name="code2model" class="code2model">&lt;Root&gt;/lateralPlan_valid</a>
+</td>
+
+</tr>
+<tr class="odd">
+<td align="right" valign="top">
+32
+</td>
+<td align="left" valign="top">
+arg_lateralPlan_ctrlType
+</td>
+<td align="left" valign="top">
+boolean_T
+</td>
+<td align="left" valign="top">
+<a href="matlab:coder.internal.code2model('app:19505')" name="code2model" class="code2model">&lt;Root&gt;/lateralPlan_ctrlType</a>
+</td>
+
+</tr>
+<tr class="even">
+<td align="right" valign="top">
+33
+</td>
+<td align="left" valign="top">
+arg_lateralPlan_yPts
+</td>
+<td align="left" valign="top">
+real32_T
+</td>
+<td align="left" valign="top">
+<a href="matlab:coder.internal.code2model('app:19926')" name="code2model" class="code2model">&lt;Root&gt;/lateralPlan_yPts</a>
+</td>
+
+</tr>
+<tr class="odd">
+<td align="right" valign="top">
+34
+</td>
+<td align="left" valign="top">
+arg_lateralPlan_headPts
+</td>
+<td align="left" valign="top">
+real32_T
+</td>
+<td align="left" valign="top">
+<a href="matlab:coder.internal.code2model('app:19927')" name="code2model" class="code2model">&lt;Root&gt;/lateralPlan_headPts</a>
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+<tr class="even">
+<td width="25%" align="left" valign="top">
+Return value
+</td>
+<td width="75%" align="left" valign="top">
+None
+</td>
+
+</tr>
+<tr class="odd">
+<td width="25%" align="left" valign="top">
+Header file
+</td>
+<td width="75%" align="left" valign="top">
+<a href="app_h.html">app.h</a>
+</td>
+
+</tr>
+
+</table>
+<p>
+Function: <a href="app_c.html#fcn_app_terminate">app_terminate</a>
+</p>
+<table width="100%" class="AltRow" cellspacing="0">
+<tr class="even">
+<td width="25%" align="left" valign="top">
+Prototype
+</td>
+<td width="75%" align="left" valign="top">
+<b>
+void app_terminate(void)
+</b>
+
+</td>
+
+</tr>
+<tr class="odd">
+<td width="25%" align="left" valign="top">
+Description
+</td>
+<td width="75%" align="left" valign="top">
+Termination entry point of generated code
+</td>
+
+</tr>
+<tr class="even">
+<td width="25%" align="left" valign="top">
+Timing
+</td>
+<td width="75%" align="left" valign="top">
+Must be called exactly once
+</td>
+
+</tr>
+<tr class="odd">
+<td width="25%" align="left" valign="top">
+Arguments
+</td>
+<td width="75%" align="left" valign="top">
+None
+</td>
+
+</tr>
+<tr class="even">
+<td width="25%" align="left" valign="top">
+Return value
+</td>
+<td width="75%" align="left" valign="top">
+None
+</td>
+
+</tr>
+<tr class="odd">
+<td width="25%" align="left" valign="top">
+Header file
+</td>
+<td width="75%" align="left" valign="top">
+<a href="app_h.html">app.h</a>
+</td>
+
+</tr>
+
+</table>
+<h3>
+<a name="sec_Inports">
+Inports
+</a>
+
+</h3>
+<span title="Click to shrink or expand table" onclick="rtwTableShrink(this)">[-]</span><table width="100%" class="AltRow FirstColumn" cellspacing="0">
+<tr class="heading">
+<th width="42%" align="left" valign="top">
+<b>
+Block Name
+</b>
+
+</th>
+<th width="26%" align="left" valign="top">
+<b>
+Code Identifier
+</b>
+
+</th>
+<th width="21%" align="left" valign="top">
+<b>
+Data Type
+</b>
+
+</th>
+<th width="10%" align="right" valign="top">
+<b>
+Dimension
+</b>
+
+</th>
+
+</tr>
+<tr class="even">
+<td width="42%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('app:16457')" name="code2model" class="code2model">&lt;Root&gt;/can_492</a>
+</td>
+<td width="26%" align="left" valign="top">
+<i>
+Defined externally
+</i>
+
+</td>
+<td width="21%" align="left" valign="top">
+uint8_T
+</td>
+<td width="10%" align="right" valign="top">
+[1  8]
+</td>
+
+</tr>
+<tr class="odd">
+<td width="42%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('app:16458')" name="code2model" class="code2model">&lt;Root&gt;/can_251</a>
+</td>
+<td width="26%" align="left" valign="top">
+<i>
+Defined externally
+</i>
+
+</td>
+<td width="21%" align="left" valign="top">
+uint8_T
+</td>
+<td width="10%" align="right" valign="top">
+[1  8]
+</td>
+
+</tr>
+<tr class="even">
+<td width="42%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('app:16459')" name="code2model" class="code2model">&lt;Root&gt;/can_355</a>
+</td>
+<td width="26%" align="left" valign="top">
+<i>
+Defined externally
+</i>
+
+</td>
+<td width="21%" align="left" valign="top">
+uint8_T
+</td>
+<td width="10%" align="right" valign="top">
+[1  8]
+</td>
+
+</tr>
+<tr class="odd">
+<td width="42%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('app:16460')" name="code2model" class="code2model">&lt;Root&gt;/can_489</a>
+</td>
+<td width="26%" align="left" valign="top">
+<i>
+Defined externally
+</i>
+
+</td>
+<td width="21%" align="left" valign="top">
+uint8_T
+</td>
+<td width="10%" align="right" valign="top">
+[1  8]
+</td>
+
+</tr>
+<tr class="even">
+<td width="42%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('app:16461')" name="code2model" class="code2model">&lt;Root&gt;/can_201</a>
+</td>
+<td width="26%" align="left" valign="top">
+<i>
+Defined externally
+</i>
+
+</td>
+<td width="21%" align="left" valign="top">
+uint8_T
+</td>
+<td width="10%" align="right" valign="top">
+[1  8]
+</td>
+
+</tr>
+<tr class="odd">
+<td width="42%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('app:16462')" name="code2model" class="code2model">&lt;Root&gt;/can_1130</a>
+</td>
+<td width="26%" align="left" valign="top">
+<i>
+Defined externally
+</i>
+
+</td>
+<td width="21%" align="left" valign="top">
+uint8_T
+</td>
+<td width="10%" align="right" valign="top">
+[1  8]
+</td>
+
+</tr>
+<tr class="even">
+<td width="42%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('app:16463')" name="code2model" class="code2model">&lt;Root&gt;/can_886</a>
+</td>
+<td width="26%" align="left" valign="top">
+<i>
+Defined externally
+</i>
+
+</td>
+<td width="21%" align="left" valign="top">
+uint8_T
+</td>
+<td width="10%" align="right" valign="top">
+[1  8]
+</td>
+
+</tr>
+<tr class="odd">
+<td width="42%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('app:16464')" name="code2model" class="code2model">&lt;Root&gt;/can_901</a>
+</td>
+<td width="26%" align="left" valign="top">
+<i>
+Defined externally
+</i>
+
+</td>
+<td width="21%" align="left" valign="top">
+uint8_T
+</td>
+<td width="10%" align="right" valign="top">
+[1  8]
+</td>
+
+</tr>
+<tr class="even">
+<td width="42%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('app:16465')" name="code2model" class="code2model">&lt;Root&gt;/can_532</a>
+</td>
+<td width="26%" align="left" valign="top">
+<i>
+Defined externally
+</i>
+
+</td>
+<td width="21%" align="left" valign="top">
+uint8_T
+</td>
+<td width="10%" align="right" valign="top">
+[1  8]
+</td>
+
+</tr>
+<tr class="odd">
+<td width="42%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('app:16466')" name="code2model" class="code2model">&lt;Root&gt;/can_485</a>
+</td>
+<td width="26%" align="left" valign="top">
+<i>
+Defined externally
+</i>
+
+</td>
+<td width="21%" align="left" valign="top">
+uint8_T
+</td>
+<td width="10%" align="right" valign="top">
+[1  8]
+</td>
+
+</tr>
+<tr class="even">
+<td width="42%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('app:16467')" name="code2model" class="code2model">&lt;Root&gt;/can_851</a>
+</td>
+<td width="26%" align="left" valign="top">
+<i>
+Defined externally
+</i>
+
+</td>
+<td width="21%" align="left" valign="top">
+uint8_T
+</td>
+<td width="10%" align="right" valign="top">
+[1  8]
+</td>
+
+</tr>
+<tr class="odd">
+<td width="42%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('app:16468')" name="code2model" class="code2model">&lt;Root&gt;/can_540</a>
+</td>
+<td width="26%" align="left" valign="top">
+<i>
+Defined externally
+</i>
+
+</td>
+<td width="21%" align="left" valign="top">
+uint8_T
+</td>
+<td width="10%" align="right" valign="top">
+[1  8]
+</td>
+
+</tr>
+<tr class="even">
+<td width="42%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('app:16469')" name="code2model" class="code2model">&lt;Root&gt;/can_758</a>
+</td>
+<td width="26%" align="left" valign="top">
+<i>
+Defined externally
+</i>
+
+</td>
+<td width="21%" align="left" valign="top">
+uint8_T
+</td>
+<td width="10%" align="right" valign="top">
+[1  8]
+</td>
+
+</tr>
+<tr class="odd">
+<td width="42%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('app:16470')" name="code2model" class="code2model">&lt;Root&gt;/can_404</a>
+</td>
+<td width="26%" align="left" valign="top">
+<i>
+Defined externally
+</i>
+
+</td>
+<td width="21%" align="left" valign="top">
+uint8_T
+</td>
+<td width="10%" align="right" valign="top">
+[1  8]
+</td>
+
+</tr>
+<tr class="even">
+<td width="42%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('app:16471')" name="code2model" class="code2model">&lt;Root&gt;/can_481</a>
+</td>
+<td width="26%" align="left" valign="top">
+<i>
+Defined externally
+</i>
+
+</td>
+<td width="21%" align="left" valign="top">
+uint8_T
+</td>
+<td width="10%" align="right" valign="top">
+[1  8]
+</td>
+
+</tr>
+<tr class="odd">
+<td width="42%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('app:16472')" name="code2model" class="code2model">&lt;Root&gt;/can_389</a>
+</td>
+<td width="26%" align="left" valign="top">
+<i>
+Defined externally
+</i>
+
+</td>
+<td width="21%" align="left" valign="top">
+uint8_T
+</td>
+<td width="10%" align="right" valign="top">
+[1  8]
+</td>
+
+</tr>
+<tr class="even">
+<td width="42%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('app:16473')" name="code2model" class="code2model">&lt;Root&gt;/can_593</a>
+</td>
+<td width="26%" align="left" valign="top">
+<i>
+Defined externally
+</i>
+
+</td>
+<td width="21%" align="left" valign="top">
+uint8_T
+</td>
+<td width="10%" align="right" valign="top">
+[1  8]
+</td>
+
+</tr>
+<tr class="odd">
+<td width="42%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('app:16474')" name="code2model" class="code2model">&lt;Root&gt;/can_516</a>
+</td>
+<td width="26%" align="left" valign="top">
+<i>
+Defined externally
+</i>
+
+</td>
+<td width="21%" align="left" valign="top">
+uint8_T
+</td>
+<td width="10%" align="right" valign="top">
+[1  8]
+</td>
+
+</tr>
+<tr class="even">
+<td width="42%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('app:16475')" name="code2model" class="code2model">&lt;Root&gt;/lateralPlan_laneWidth</a>
+</td>
+<td width="26%" align="left" valign="top">
+<i>
+Defined externally
+</i>
+
+</td>
+<td width="21%" align="left" valign="top">
+real32_T
+</td>
+<td width="10%" align="right" valign="top">
+1
+</td>
+
+</tr>
+<tr class="odd">
+<td width="42%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('app:16476')" name="code2model" class="code2model">&lt;Root&gt;/lateralPlan_lProb</a>
+</td>
+<td width="26%" align="left" valign="top">
+<i>
+Defined externally
+</i>
+
+</td>
+<td width="21%" align="left" valign="top">
+real32_T
+</td>
+<td width="10%" align="right" valign="top">
+1
+</td>
+
+</tr>
+<tr class="even">
+<td width="42%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('app:16477')" name="code2model" class="code2model">&lt;Root&gt;/lateralPlan_rProb</a>
+</td>
+<td width="26%" align="left" valign="top">
+<i>
+Defined externally
+</i>
+
+</td>
+<td width="21%" align="left" valign="top">
+real32_T
+</td>
+<td width="10%" align="right" valign="top">
+1
+</td>
+
+</tr>
+<tr class="odd">
+<td width="42%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('app:16478')" name="code2model" class="code2model">&lt;Root&gt;/lateralPlan_dProb</a>
+</td>
+<td width="26%" align="left" valign="top">
+<i>
+Defined externally
+</i>
+
+</td>
+<td width="21%" align="left" valign="top">
+real32_T
+</td>
+<td width="10%" align="right" valign="top">
+1
+</td>
+
+</tr>
+<tr class="even">
+<td width="42%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('app:16479')" name="code2model" class="code2model">&lt;Root&gt;/lateralPlan_rawCurvature</a>
+</td>
+<td width="26%" align="left" valign="top">
+<i>
+Defined externally
+</i>
+
+</td>
+<td width="21%" align="left" valign="top">
+real32_T
+</td>
+<td width="10%" align="right" valign="top">
+1
+</td>
+
+</tr>
+<tr class="odd">
+<td width="42%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('app:16480')" name="code2model" class="code2model">&lt;Root&gt;/lateralPlan_rawCurvatureRate</a>
+</td>
+<td width="26%" align="left" valign="top">
+<i>
+Defined externally
+</i>
+
+</td>
+<td width="21%" align="left" valign="top">
+real32_T
+</td>
+<td width="10%" align="right" valign="top">
+1
+</td>
+
+</tr>
+<tr class="even">
+<td width="42%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('app:16481')" name="code2model" class="code2model">&lt;Root&gt;/lateralPlan_curvature</a>
+</td>
+<td width="26%" align="left" valign="top">
+<i>
+Defined externally
+</i>
+
+</td>
+<td width="21%" align="left" valign="top">
+real32_T
+</td>
+<td width="10%" align="right" valign="top">
+1
+</td>
+
+</tr>
+<tr class="odd">
+<td width="42%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('app:16482')" name="code2model" class="code2model">&lt;Root&gt;/lateralPlan_curvatureRate</a>
+</td>
+<td width="26%" align="left" valign="top">
+<i>
+Defined externally
+</i>
+
+</td>
+<td width="21%" align="left" valign="top">
+real32_T
+</td>
+<td width="10%" align="right" valign="top">
+1
+</td>
+
+</tr>
+<tr class="even">
+<td width="42%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('app:18810')" name="code2model" class="code2model">&lt;Root&gt;/lateralPlan_pathCof_C3</a>
+</td>
+<td width="26%" align="left" valign="top">
+<i>
+Defined externally
+</i>
+
+</td>
+<td width="21%" align="left" valign="top">
+real32_T
+</td>
+<td width="10%" align="right" valign="top">
+1
+</td>
+
+</tr>
+<tr class="odd">
+<td width="42%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('app:18811')" name="code2model" class="code2model">&lt;Root&gt;/lateralPlan_pathCof_C2</a>
+</td>
+<td width="26%" align="left" valign="top">
+<i>
+Defined externally
+</i>
+
+</td>
+<td width="21%" align="left" valign="top">
+real32_T
+</td>
+<td width="10%" align="right" valign="top">
+1
+</td>
+
+</tr>
+<tr class="even">
+<td width="42%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('app:18812')" name="code2model" class="code2model">&lt;Root&gt;/lateralPlan_pathCof_C1</a>
+</td>
+<td width="26%" align="left" valign="top">
+<i>
+Defined externally
+</i>
+
+</td>
+<td width="21%" align="left" valign="top">
+real32_T
+</td>
+<td width="10%" align="right" valign="top">
+1
+</td>
+
+</tr>
+<tr class="odd">
+<td width="42%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('app:18813')" name="code2model" class="code2model">&lt;Root&gt;/lateralPlan_pathCof_C0</a>
+</td>
+<td width="26%" align="left" valign="top">
+<i>
+Defined externally
+</i>
+
+</td>
+<td width="21%" align="left" valign="top">
+real32_T
+</td>
+<td width="10%" align="right" valign="top">
+1
+</td>
+
+</tr>
+<tr class="even">
+<td width="42%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('app:16483')" name="code2model" class="code2model">&lt;Root&gt;/lateralPlan_valid</a>
+</td>
+<td width="26%" align="left" valign="top">
+<i>
+Defined externally
+</i>
+
+</td>
+<td width="21%" align="left" valign="top">
+boolean_T
+</td>
+<td width="10%" align="right" valign="top">
+1
+</td>
+
+</tr>
+<tr class="odd">
+<td width="42%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('app:19505')" name="code2model" class="code2model">&lt;Root&gt;/lateralPlan_ctrlType</a>
+</td>
+<td width="26%" align="left" valign="top">
+<i>
+Defined externally
+</i>
+
+</td>
+<td width="21%" align="left" valign="top">
+boolean_T
+</td>
+<td width="10%" align="right" valign="top">
+1
+</td>
+
+</tr>
+<tr class="even">
+<td width="42%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('app:19926')" name="code2model" class="code2model">&lt;Root&gt;/lateralPlan_yPts</a>
+</td>
+<td width="26%" align="left" valign="top">
+<i>
+Defined externally
+</i>
+
+</td>
+<td width="21%" align="left" valign="top">
+real32_T
+</td>
+<td width="10%" align="right" valign="top">
+[1  17]
+</td>
+
+</tr>
+<tr class="odd">
+<td width="42%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('app:19927')" name="code2model" class="code2model">&lt;Root&gt;/lateralPlan_headPts</a>
+</td>
+<td width="26%" align="left" valign="top">
+<i>
+Defined externally
+</i>
+
+</td>
+<td width="21%" align="left" valign="top">
+real32_T
+</td>
+<td width="10%" align="right" valign="top">
+[1  17]
+</td>
+
+</tr>
+
+</table>
+<h3>
+<a name="sec_Outports">
+Outports
+</a>
+
+</h3>
+<p>
+No Outports in model.
+</p>
+<h3>
+<a name="sec_Interface_Parameters">
+Interface Parameters
+</a>
+
+</h3>
+<p>
+No interface/tunable parameters in model.
+</p>
+<h3>
+<a name="sec_Data_Stores">
+Data Stores
+</a>
+
+</h3>
+<p>
+No data stores in the model; note that this report lists only data stores with non-auto storage class and global data stores
+</p>
+
+</body>
+
+</html>

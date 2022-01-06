@@ -69,18 +69,7 @@ void HomeWindow::showDriverView(bool show) {
 void HomeWindow::mousePressEvent(QMouseEvent* e) {
   // Handle sidebar collapsing
   if (onroad->isVisible() && (!sidebar->isVisible() || e->x() > sidebar->width())) {
-
-    // TODO: Handle this without exposing pointer to map widget
-    // Hide map first if visible, then hide sidebar
-    if (onroad->map != nullptr && onroad->map->isVisible()) {
-      onroad->map->setVisible(false);
-    } else if (!sidebar->isVisible()) {
-      sidebar->setVisible(true);
-    } else {
-      sidebar->setVisible(false);
-
-      if (onroad->map != nullptr) onroad->map->setVisible(true);
-    }
+    sidebar->setVisible(!sidebar->isVisible() && !onroad->isMapVisible());
   }
 }
 
@@ -189,6 +178,6 @@ void OffroadHome::refresh() {
   update_notif->setVisible(updateAvailable);
   alert_notif->setVisible(alerts);
   if (alerts) {
-    alert_notif->setText(QString::number(alerts) + " ALERT" + (alerts > 1 ? "S" : ""));
+    alert_notif->setText(QString::number(alerts) + (alerts > 1 ? " ALERTS" : " ALERT"));
   }
 }

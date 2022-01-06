@@ -1,0 +1,21 @@
+<html>
+<head>
+    <title>上传文件</title>
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/upload.css') }}"/>
+</head>
+<body>
+<p id="title">上传文件</p>
+<div id="div">
+    <form action="{{ url_for('upload_success') }}" method="POST"
+          enctype="multipart/form-data">
+        <input type="file" name="file"/>
+        <input type="submit" id="submit" value="提交上传"/>
+    </form>
+</div>
+<div class="back-div">
+    <p id="back" style="font-size: larger">
+        <a href="{{ url_for('home') }}">back home</a>
+    </p>
+</div>
+</body>
+</html>

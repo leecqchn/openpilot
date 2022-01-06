@@ -1,0 +1,140 @@
+#!/usr/bin/env python3
+from cereal import car, log
+from common.params import Params
+from common.realtime import Priority, config_realtime_process
+from selfdrive.swaglog import cloudlog
+from selfdrive.controls.lib.longitudinal_planner import Planner
+from selfdrive.controls.lib.lateral_planner import LateralPlanner
+from selfdrive.hardware import TICI, JETSON
+import cereal.messaging as messaging
+from selfdrive.boardd.boardd import can_list_to_can_capnp
+import threading
+import socket
+import time
+
+SafetyModel = car.CarParams.SafetyModel
+PandaType = log.PandaState.PandaType
+HarnessStatus = log.PandaState.HarnessStatus
+
+class FakePanda(threading.Thread):
+  def __init__(self, ):
+        super(FakePanda, self).__init__()
+        self.pm = messaging.PubMaster(['pandaStates'])
+
+  def run(self):
+      while True:
+        dat = messaging.new_message('pandaStates', 1)
+        #dat.pandaStates[0].voltage = 330
+        #dat.pandaStates[0].current = 30 
+        dat.pandaStates[0].ignitionLine = True
+        dat.pandaStates[0].controlsAllowed = True
+        dat.pandaStates[0].gasInterceptorDetected = True
+        #dat.pandaStates[0].hasGps = False
+        dat.pandaStates[0].canSendErrs =0
+        dat.pandaStates[0].canFwdErrs =0
+        dat.pandaStates[0].canRxErrs =0
+        dat.pandaStates[0].pandaType = PandaType.blackPanda
+        #dat.pandaStates[0].fanSpeedRpm = 1000
+        dat.pandaStates[0].safetyModel = SafetyModel.volkswagenPq
+        dat.pandaStates[0].heartbeatLost = False
+        dat.pandaStates[0].harnessStatus = HarnessStatus.normal
+
+        self.pm.send('pandaStates', dat)
+        time.sleep(2)
+
+### threading for connect stm32 hardware
+class STM32UDP(threading.Thread):
+    def __init__(self, server):
+        super(STM32UDP, self).__init__()
+        self.server = server
+        self.id_list = ['492', '251', '355', '489', '201', \
+                        '1130', '886', '901', '532',  '485', \
+                        '851', '540', '758', '404', '481', \
+                        '389', '593', '516' ]
+        self.can_data = {}
+        for idx in self.id_list:
+            self.can_data['ch_'+idx] = [0,0,0,0,0,0,0,0]
+        self.pm = messaging.PubMaster(['can'])
+
+    def run(self):
+        while True:
+          t = time.time()
+          #print(self.can_data)
+          #data, addr= self.server.recvfrom(1024)
+          #data = list(data)
+          data = [int(0) for i in range(144)]
+          can_sends = []
+
+          dat = messaging.new_message('can', len(self.id_list))
+          dat.valid = True
+
+          i = 0
+          for idd in self.id_list:
+            dat.can[i] = {
+                "address": int(idd),
+                "busTime": 0,
+                "dat":  bytes(data[i*8:(i+1)*8]),
+                "src": 0,
+                }
+            i+=1
+          dt = time.time() - t
+          #print(dat)
+          self.pm.send('can', dat)
+          if dt<0.01:
+            time.sleep(0.01-dt)
+def main():
+  time.sleep(5)
+  ### start fake panda publish
+  fake_panda = FakePanda()
+  fake_panda.setDaemon(True)
+  fake_panda.start()
+  ''' 
+  while True:
+    time.sleep(1)
+  '''
+  ### loop to connect stm32 udp server
+  udp_server = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+  udp_status = False
+  #stm32_panda_ip = '192.168.5.11'
+  stm32_panda_ip = '0.0.0.0'
+  while not udp_status:
+    try:
+      udp_server.bind((stm32_panda_ip, 8888))
+      status = True
+      print('connect to panda!')
+      break
+    except Exception as e:
+      print('connect filed to my panda.',e)
+      status = False
+      time.sleep(1)
+
+  can_fake = STM32UDP(udp_server)
+  can_fake.setDaemon(True)
+  can_fake.start()
+  sm = messaging.SubMaster(['sendcan'])
+  RC = 0
+  while True:
+    sm.update()
+
+    if sm.updated['sendcan']:
+      data = sm['sendcan']
+      can_num = len(data)
+      lka_ctrl_frame = []
+      lka_hud_frame = []
+      for i in range(can_num):
+        if data[i].address == 509:
+          lka_ctrl_frame = list(data[i].dat)
+        elif data[i].address == 359:
+          lka_hud_frame = list(data[i].dat)
+
+      if len(lka_ctrl_frame) == 8 and len(lka_hud_frame) ==8:
+        sendData = lka_ctrl_frame  + lka_hud_frame + [RC, 1, 0, 0]
+        #print(sendData)
+        #can_fake.server.sendto(b''.join(map(lambda x:int.to_bytes(x,1,'little'), sendData)), ('192.168.5.12', 9999) )
+      RC += 1
+      if RC >15:
+        RC = 0
+ 
+
+if __name__ == "__main__":
+  main()

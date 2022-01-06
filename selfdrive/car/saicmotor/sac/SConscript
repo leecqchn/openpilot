@@ -1,0 +1,12 @@
+Import('env')
+import os
+import shutil
+import glob
+
+source = glob.glob('SAC_ert_rtw/*.c')
+
+print(source)
+
+env.SharedLibrary('sac', source, LIBS=['m'], CPPPATH='SAC_ert_rtw')
+
+

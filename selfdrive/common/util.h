@@ -1,6 +1,7 @@
 #pragma once
 
 #include <fcntl.h>
+#include <sys/stat.h>
 #include <unistd.h>
 
 #include <algorithm>
@@ -12,17 +13,35 @@
 #include <memory>
 #include <string>
 #include <thread>
+#include <vector>
+
+// keep trying if x gets interrupted by a signal
+#define HANDLE_EINTR(x)                                        \
+  ({                                                           \
+    decltype(x) ret_;                                          \
+    int try_cnt = 0;                                           \
+    do {                                                       \
+      ret_ = (x);                                              \
+    } while (ret_ == -1 && errno == EINTR && try_cnt++ < 100); \
+    ret_;                                                       \
+  })
 
 #ifndef sighandler_t
 typedef void (*sighandler_t)(int sig);
 #endif
 
-void set_thread_name(const char* name);
-
-int set_realtime_priority(int level);
-int set_core_affinity(int core);
+const double MILE_TO_KM = 1.609344;
+const double KM_TO_MILE = 1. / MILE_TO_KM;
+const double MS_TO_KPH = 3.6;
+const double MS_TO_MPH = MS_TO_KPH * KM_TO_MILE;
+const double METER_TO_MILE = KM_TO_MILE / 1000.0;
+const double METER_TO_FOOT = 3.28084;
 
 namespace util {
+
+void set_thread_name(const char* name);
+int set_realtime_priority(int level);
+int set_core_affinity(std::vector<int> cores);
 
 // ***** Time helpers *****
 struct tm get_time();
@@ -41,10 +60,6 @@ T map_val(T x, T a1, T a2, T b1, T b2) {
 
 // ***** string helpers *****
 
-inline bool starts_with(const std::string& s, const std::string& prefix) {
-  return s.compare(0, prefix.size(), prefix) == 0;
-}
-
 template <typename... Args>
 std::string string_format(const std::string& format, Args... args) {
   size_t size = snprintf(nullptr, 0, format.c_str(), args...) + 1;
@@ -57,17 +72,23 @@ std::string getenv(const char* key, const char* default_val = "");
 int getenv(const char* key, int default_val);
 float getenv(const char* key, float default_val);
 
-std::string tohex(const uint8_t* buf, size_t buf_size);
-std::string hexdump(const std::string& in);
-std::string base_name(std::string const& path);
+std::string hexdump(const uint8_t* in, const size_t size);
 std::string dir_name(std::string const& path);
 
 // **** file fhelpers *****
 std::string read_file(const std::string& fn);
 std::map<std::string, std::string> read_files_in_dir(const std::string& path);
-int write_file(const char* path, const void* data, size_t size, int flags = O_WRONLY, mode_t mode = 0777);
+int write_file(const char* path, const void* data, size_t size, int flags = O_WRONLY, mode_t mode = 0664);
+
+FILE* safe_fopen(const char* filename, const char* mode);
+size_t safe_fwrite(const void * ptr, size_t size, size_t count, FILE * stream);
+int safe_fflush(FILE *stream);
+
 std::string readlink(const std::string& path);
 bool file_exists(const std::string& fn);
+bool create_directories(const std::string &dir, mode_t mode);
+
+std::string check_output(const std::string& command);
 
 inline void sleep_for(const int milliseconds) {
   std::this_thread::sleep_for(std::chrono::milliseconds(milliseconds));
@@ -134,3 +155,9 @@ public:
 private:
   float x_, k_;
 };
+
+template<typename T>
+void update_max_atomic(std::atomic<T>& max, T const& value) {
+  T prev = max;
+  while(prev < value && !max.compare_exchange_weak(prev, value)) {}
+}

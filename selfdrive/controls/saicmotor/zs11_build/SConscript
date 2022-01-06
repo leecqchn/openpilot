@@ -1,0 +1,33 @@
+Import('env')
+import os
+import shutil
+import glob
+source = glob.glob('./app_ert_rtw/*.c')
+for i in range(len(source)):
+	print(source[i])
+	shutil.copy(str(source[i]), './src')
+
+header = glob.glob('./app_ert_rtw/*.h')
+for i in range(len(header)):
+	print(header[i])
+	shutil.copy(str(header[i]), './include')
+
+
+source = glob.glob('*.c')
+
+for i in range(len(source)):
+	print(source[i])
+	shutil.copy(str(source[i]), './src')
+
+header = glob.glob('*.h')
+for i in range(len(header)):
+	print(header[i])
+	shutil.copy(str(header[i]), './include')
+
+source = glob.glob('src/*.c')
+
+print(source, header)
+
+env.SharedLibrary('VLatC', source, LIBS=['m'], CPPPATH='include')
+
+
