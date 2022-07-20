@@ -1,0 +1,119 @@
+ * Serving Flask app 'web_server' (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: off
+Traceback (most recent call last):
+  File "/data/openpilot/selfdrive/controls/saicmotor/web_server.py", line 83, in <module>
+    app.run(host='0.0.0.0', port=8890)
+  File "/data/data/com.termux/files/usr/lib/python3.8/site-packages/flask/app.py", line 920, in run
+    run_simple(t.cast(str, host), port, self, **options)
+  File "/data/data/com.termux/files/usr/lib/python3.8/site-packages/werkzeug/serving.py", line 1010, in run_simple
+    inner()
+  File "/data/data/com.termux/files/usr/lib/python3.8/site-packages/werkzeug/serving.py", line 950, in inner
+    srv = make_server(
+  File "/data/data/com.termux/files/usr/lib/python3.8/site-packages/werkzeug/serving.py", line 782, in make_server
+    return ThreadedWSGIServer(
+  File "/data/data/com.termux/files/usr/lib/python3.8/site-packages/werkzeug/serving.py", line 688, in __init__
+    super().__init__(server_address, handler)  # type: ignore
+  File "/data/data/com.termux/files/usr/lib/python3.8/socketserver.py", line 452, in __init__
+    self.server_bind()
+  File "/data/data/com.termux/files/usr/lib/python3.8/http/server.py", line 138, in server_bind
+    socketserver.TCPServer.server_bind(self)
+  File "/data/data/com.termux/files/usr/lib/python3.8/socketserver.py", line 466, in server_bind
+    self.socket.bind(self.server_address)
+OSError: [Errno 98] Address already in use
+ * Serving Flask app 'web_server' (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: off
+Traceback (most recent call last):
+  File "/data/openpilot/selfdrive/controls/saicmotor/web_server.py", line 83, in <module>
+    app.run(host='0.0.0.0', port=8890)
+  File "/data/data/com.termux/files/usr/lib/python3.8/site-packages/flask/app.py", line 920, in run
+    run_simple(t.cast(str, host), port, self, **options)
+  File "/data/data/com.termux/files/usr/lib/python3.8/site-packages/werkzeug/serving.py", line 1010, in run_simple
+    inner()
+  File "/data/data/com.termux/files/usr/lib/python3.8/site-packages/werkzeug/serving.py", line 950, in inner
+    srv = make_server(
+  File "/data/data/com.termux/files/usr/lib/python3.8/site-packages/werkzeug/serving.py", line 782, in make_server
+    return ThreadedWSGIServer(
+  File "/data/data/com.termux/files/usr/lib/python3.8/site-packages/werkzeug/serving.py", line 688, in __init__
+    super().__init__(server_address, handler)  # type: ignore
+  File "/data/data/com.termux/files/usr/lib/python3.8/socketserver.py", line 452, in __init__
+    self.server_bind()
+  File "/data/data/com.termux/files/usr/lib/python3.8/http/server.py", line 138, in server_bind
+    socketserver.TCPServer.server_bind(self)
+  File "/data/data/com.termux/files/usr/lib/python3.8/socketserver.py", line 466, in server_bind
+    self.socket.bind(self.server_address)
+OSError: [Errno 98] Address already in use
+ * Serving Flask app 'web_server' (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: off
+ * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+ * Running on http://127.0.0.1:8890/ (Press CTRL+C to quit)
+ * Serving Flask app 'web_server' (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: off
+Traceback (most recent call last):
+  File "/data/openpilot/selfdrive/controls/saicmotor/web_server.py", line 83, in <module>
+    app.run(host='0.0.0.0', port=8890)
+  File "/data/data/com.termux/files/usr/lib/python3.8/site-packages/flask/app.py", line 920, in run
+    run_simple(t.cast(str, host), port, self, **options)
+  File "/data/data/com.termux/files/usr/lib/python3.8/site-packages/werkzeug/serving.py", line 1010, in run_simple
+    inner()
+  File "/data/data/com.termux/files/usr/lib/python3.8/site-packages/werkzeug/serving.py", line 950, in inner
+    srv = make_server(
+  File "/data/data/com.termux/files/usr/lib/python3.8/site-packages/werkzeug/serving.py", line 782, in make_server
+    return ThreadedWSGIServer(
+  File "/data/data/com.termux/files/usr/lib/python3.8/site-packages/werkzeug/serving.py", line 688, in __init__
+    super().__init__(server_address, handler)  # type: ignore
+  File "/data/data/com.termux/files/usr/lib/python3.8/socketserver.py", line 452, in __init__
+    self.server_bind()
+  File "/data/data/com.termux/files/usr/lib/python3.8/http/server.py", line 138, in server_bind
+    socketserver.TCPServer.server_bind(self)
+  File "/data/data/com.termux/files/usr/lib/python3.8/socketserver.py", line 466, in server_bind
+    self.socket.bind(self.server_address)
+OSError: [Errno 98] Address already in use
+ * Serving Flask app 'web_server' (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: off
+ * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+ * Running on http://127.0.0.1:8890/ (Press CTRL+C to quit)
+ * Serving Flask app 'web_server' (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: off
+ * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+ * Running on http://127.0.0.1:8890/ (Press CTRL+C to quit)
+Fatal Python error: init_import_size: Failed to import the site module
+Python runtime state: initialized
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/usr/lib/python3.8/site.py", line 580, in <module>
+    main()
+  File "/data/data/com.termux/files/usr/lib/python3.8/site.py", line 567, in main
+    known_paths = addsitepackages(known_paths)
+  File "/data/data/com.termux/files/usr/lib/python3.8/site.py", line 350, in addsitepackages
+    addsitedir(sitedir, known_paths)
+  File "/data/data/com.termux/files/usr/lib/python3.8/site.py", line 208, in addsitedir
+    addpackage(sitedir, name, known_paths)
+  File "/data/data/com.termux/files/usr/lib/python3.8/site.py", line 169, in addpackage
+    exec(line)
+  File "<string>", line 1, in <module>
+  File "<string>", line 2, in <module>
+  File "/data/data/com.termux/files/usr/lib/python3.8/site-packages/future_fstrings.py", line 4, in <module>
+    import argparse
+  File "/data/data/com.termux/files/usr/lib/python3.8/argparse.py", line 89, in <module>
+    import shutil as _shutil
+KeyboardInterrupt

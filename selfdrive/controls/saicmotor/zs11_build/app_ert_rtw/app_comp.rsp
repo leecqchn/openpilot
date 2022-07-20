@@ -1,0 +1,9 @@
+-IC:/ADAS/ads_main
+-IC:/ADAS/ads_main/app_ert_rtw
+-IC:/ADAS/ads_com/Mdl_Lib/Cartesian2Frenet
+-IC:/Program\ Files/Polyspace/R2020b/extern/include
+-IC:/Program\ Files/Polyspace/R2020b/simulink/include
+-IC:/Program\ Files/Polyspace/R2020b/rtw/c/src
+-IC:/Program\ Files/Polyspace/R2020b/rtw/c/src/ext_mode/common
+-IC:/Program\ Files/Polyspace/R2020b/rtw/c/ert
+-IC:/Program\ Files/Polyspace/R2020b/toolbox/shared/can/src/scanutil

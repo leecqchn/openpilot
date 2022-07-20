@@ -32,13 +32,14 @@ def plannerd_thread(sm=None, pm=None):
   if pm is None:
     pm = messaging.PubMaster(['longitudinalPlan', 'lateralPlan'])
 
+  preview_curvature = 0.
   while True:
     sm.update()
 
     if sm.updated['modelV2']:
-      lateral_planner.update(sm)
+      preview_curvature = lateral_planner.update(sm)
       lateral_planner.publish(sm, pm)
-      longitudinal_planner.update(sm)
+      longitudinal_planner.update(sm, preview_curvature)
       longitudinal_planner.publish(sm, pm)
 
 

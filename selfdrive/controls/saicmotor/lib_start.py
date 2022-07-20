@@ -14,13 +14,13 @@ def get_time():
 
 def get_time_from_stm32():
     s = struct.Struct('<IIIIII')
+    print('start rtc')
     server = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     server.bind( ('192.168.5.11', 8899))
-    time.sleep(0.1)
     data, addr= server.recvfrom(1024)
     time_arr = list(s.unpack(data))
     time_arr = [str(i) for i in time_arr]
-    real_time = time_arr[0] + '/' + time_arr[1] + '/' + time_arr[2] + ' ' + \
+    real_time = time_arr[1] + '/' + time_arr[0] + '/' + time_arr[2] + ' ' + \
         time_arr[3] + ':' + time_arr[4] + ':' + time_arr[5]
     print(real_time)
     return real_time

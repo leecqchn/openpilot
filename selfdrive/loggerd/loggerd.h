@@ -80,7 +80,7 @@ const LogCameraInfo cameras_logged[] = {
     .downscale = false,
     .has_qcamera = false,
     .trigger_rotate = Hardware::TICI(),
-    .enable = !Hardware::PC(),
+    .enable = true,
     .record = Params().getBool("RecordFront"),
   },
   {
@@ -100,11 +100,11 @@ const LogCameraInfo cameras_logged[] = {
 const LogCameraInfo qcam_info = {
   .filename = "qcamera.ts",
   .fps = MAIN_FPS,
-  .bitrate = 256000,
+  .bitrate = 1500000,
   .is_h265 = false,
   .downscale = true,
-  .frame_width = Hardware::TICI() ? 526 : 480,
-  .frame_height = Hardware::TICI() ? 330 : 360 // keep pixel count the same?
+  .frame_width = Hardware::TICI() ? 640: 640,
+  .frame_height = Hardware::TICI() ? 480: 480// keep pixel count the same?
 };
 
 struct LoggerdState {

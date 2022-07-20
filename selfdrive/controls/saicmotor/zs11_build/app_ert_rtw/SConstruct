@@ -1,0 +1,14 @@
+import glob
+
+
+env = Environment(CC = "gcc", CXX = "g++", CCFLAGS = "-D PORTABLE_WORDSIZES")
+
+com_head = ['./', ]
+
+com_src = glob.glob('./*.c')
+
+
+env.SharedLibrary('ADAS_APP', com_src, CPPPATH = com_head)
+
+
+

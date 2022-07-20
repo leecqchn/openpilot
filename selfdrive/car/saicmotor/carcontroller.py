@@ -21,6 +21,12 @@ class CarController():
     self.lka_req_toq = self.cffi.new("float * ")
     self.lka_req_sts = self.cffi.new("unsigned char * ")
 
+    self.accel = 0
+    self.speed = 0
+    self.gas = 0
+    self.brake = 0
+
+
   def update(self, enabled, CS, actuators, pcm_cancel_cmd, hud_alert):
     ''' openpilot official pid tracking steering angle
     #print(actuators.steer)
@@ -46,7 +52,8 @@ class CarController():
     can_sends = []
 
     # 20ms cycle  for can message sending
-    if self.ccframe % 2==0:
+    if self.ccframe % 2 == 0:
+      idx = self.ccframe//2
       ## sac update
       VehSpd = max(CS.out.vEgo*3.6, 1) # zeros deive avoid
       # eps mode. different mode shoud has different parameters
@@ -71,16 +78,22 @@ class CarController():
           self.lka_req_toq, self.lka_req_sts)
       ## create lka_hud can message
       ## io: (packer, tja_ica_sys_state, is_left_line_visiable, is_right_line_visiable, handoff_wrnng_lvl):
-      can_sends.append(create_lkas_hud(self.packer, 2 if enabled else 1, 2 if enabled else 1, 2 if enabled else 1, 1))
+      #can_sends.append(create_lkas_hud(self.packer, 2 if enabled else 1, 2 if enabled else 1, 2 if enabled else 1, 1))
 
 
       ## create lka_ctrl can message
       ## io: (packer, lka_rc, lka_toq, lka_toq_sts, lka_toq_valid, lka_isDrvrTkovReq):
-      can_sends.append(create_lkas_command(self.packer, int(self.ccframe/2), float(self.lka_req_toq[0]), int(self.lka_req_sts[0]), 0, 0))
+      #can_sends.append(create_lkas_command(self.packer, int(self.ccframe/2), float(self.lka_req_toq[0]), int(self.lka_req_sts[0]), 0, 0, idx, ))
       #lka_ctrl_frame = FVCM_EPS_Packer(int(self.ccframe/2), self.lka_req_toq[0], 0, int(self.lka_req_sts[0]), 0, 0)
       #can_sends.append([509, 0, bytes(lka_ctrl_frame), 0, 0])
 
     self.ccframe += 1
-    if self.ccframe > 30:
+    if self.ccframe > 15:
       self.ccframe = 0
-    return can_sends
+    new_actuators = actuators.copy()
+    new_actuators.speed = self.speed
+    new_actuators.accel = self.accel
+    new_actuators.gas = self.gas
+    new_actuators.brake = self.brake
+
+    return new_actuators, can_sends

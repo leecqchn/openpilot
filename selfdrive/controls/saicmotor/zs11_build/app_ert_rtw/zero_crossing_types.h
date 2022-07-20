@@ -3,16 +3,13 @@
  *
  * Code generated for Simulink model 'app'.
  *
- * Model version                  : 5.26
+ * Model version                  : 1.172
  * Simulink Coder version         : 9.4 (R2020b) 29-Jul-2020
- * C/C++ source code generated on : Wed Dec 15 13:43:11 2021
+ * C/C++ source code generated on : Thu Feb 24 05:55:06 2022
  *
  * Target selection: ert.tlc
- * Embedded hardware selection: ARM Compatible->ARM Cortex-A
- * Code generation objectives:
- *    1. ROM efficiency
- *    2. RAM efficiency
- *    3. Execution efficiency
+ * Embedded hardware selection: Infineon->TriCore
+ * Code generation objectives: Unspecified
  * Validation result: Not run
  */
 

@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python4
 import time
 import zmq
 from cffi import FFI
@@ -71,13 +71,15 @@ def download_file():
         f_list = getfile()
         print(f_list)
         if True:#is_Have_file(download_filename):
-            srcVideo = root_dir + 'realdata/' + download_filename+ '/' + 'fcamera.hevc'
-            destVideo= root_dir + 'realdata/' + download_filename+ '/' + download_filename+ '_fcamera.mp4'
-            os.system("ffmpeg -i {srcVideo} -y  -acodec copy -vcodec copy -f mp4    {destVideo}".format(srcVideo=srcVideo, destVideo=destVideo) )
-            return send_from_directory(root_dir + 'realdata/' + download_filename+ '/' , download_filename+'_fcamera.mp4', as_attachment=True)
+            #srcVideo = root_dir + 'realdata/' + download_filename+ '/' + 'fcamera.hevc'
+            #destVideo= root_dir + 'realdata/' + download_filename+ '/' + download_filename+ '_fcamera.mp4'
+            #os.system("ffmpeg -i {srcVideo} -y  -acodec copy -vcodec copy -f mp4 {destVideo}".format(srcVideo=srcVideo, destVideo=destVideo) )
+
+            #os.system("ffmpeg -i {srcVideo} -y -c:v libx265 -vf scale=640:360 {destVideo}".format(srcVideo=srcVideo, destVideo=destVideo) )
+            return send_from_directory(root_dir + 'realdata/' + download_filename+ '/' , 'qcamera.ts', as_attachment=True)
         else:
             abort(404)
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8890)
+    app.run(host='0.0.0.0', port=8892)

@@ -137,7 +137,7 @@ class Cluster():
       "vRel": float(lead_msg.v[0] - v_ego),
       "vLead": float(lead_msg.v[0]),
       "vLeadK": float(lead_msg.v[0]),
-      "aLeadK": float(0),
+      "aLeadK": float(lead_msg.a[0]),
       "aLeadTau": _LEAD_ACCEL_TAU,
       "fcw": False,
       "modelProb": float(lead_msg.prob),
@@ -146,7 +146,7 @@ class Cluster():
     }
 
   def __str__(self):
-    ret = "x: %4.1f  y: %4.1f  v: %4.1f  a: %4.1f" % (self.dRel, self.yRel, self.vRel, self.aLeadK)
+    ret = f"x: {self.dRel:4.1f}  y: {self.yRel:4.1f}  v: {self.vRel:4.1f}  a: {self.aLeadK:4.1f}"
     return ret
 
   def potential_low_speed_lead(self, v_ego):

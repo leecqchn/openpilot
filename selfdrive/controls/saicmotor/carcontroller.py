@@ -13,11 +13,11 @@ from selfdrive.hardware import TICI
 import cereal.messaging as messaging
 from cereal import log, car
 from selfdrive.controls.saicmotor.lib_latCtrl import latCtrl
-from selfdrive.controls.saicmotor.lib_udpSocket import STM32UDP
-
+import struct
 from selfdrive.controls.lib.events import Events, ET
 from selfdrive.controls.lib.alertmanager import AlertManager
 from selfdrive.controls.lib.drive_helpers import get_lag_adjusted_curvature
+from selfdrive.common.zmq_msg import SubMaster, PubMaster
 
 State = log.ControlsState.OpenpilotState
 LaneChangeState = log.LateralPlan.LaneChangeState
@@ -45,7 +45,7 @@ class CarController():
     self.pp_curvature = 0
     self.pp_rawCurvatureRate = 0
     self.pp_curvatureRate = 0
-    self.rolling_count = 0
+    self.RC = 0
     self.active_prev = False
     self.CP = self.get_CP()
     self.CS = car.CarState.new_message()
@@ -65,6 +65,13 @@ class CarController():
     self.debug_flag = False
     self.debug_flag_last = False
     self.soft_disable_timer = 0
+    # sm-pm
+    self.can_sm = SubMaster(server_list=['ch_can'], isDict=True)
+    self.can_pm = PubMaster(server_list=['control'])
+
+    self.sm = messaging.SubMaster(['modelV2', 'lateralPlan', 'liveCalibration', 'deviceState'])
+    self.pm = messaging.PubMaster(['controlsState', 'carState', 'carParams', 'carControl'])
+
 
   # get carParams
   def get_CP(self):
@@ -162,11 +169,28 @@ class CarController():
             self.current_alert_types.append(ET.ENABLE)
 
   # update controller
-  def update(self, udp, sm, pm):
-    ch_can_data = udp.can_data
+  def update(self):
+    ch_can_data = self.can_sm.data['ch_can']
+
+    ### get object data
+    model_data = self.sm['modelV2']
+    if len(model_data.leadsV3) > 0:
+      obj_01_prob = model_data.leadsV3[0].prob
+      obj_01_dx = model_data.leadsV3[0].x[0]
+      obj_01_dy = -1*model_data.leadsV3[0].y[0]
+      obj_01_v = model_data.leadsV3[0].v[0]
+      obj_01_a = model_data.leadsV3[0].a[0]
+    else:
+      obj_01_prob = 0
+      obj_01_dx = 0
+      obj_01_dy = 0
+      obj_01_v = 0
+      obj_01_a = 0
+
+    #print(obj_01_prob, obj_01_dx)
 
     ### get latera planner y and heading points
-    lat_plan = sm['lateralPlan']
+    lat_plan = self.sm['lateralPlan']
     if len(list(lat_plan.planYpts)) == 17:
       mpc_ypts = list(lat_plan.planYpts)
     else:
@@ -183,24 +207,32 @@ class CarController():
                                                                              lat_plan.curvatureRates)
     ### controller step function
     #print(mpc_desired_curvature, mpc_ypts)
-    self.libController.app_step(  [int(i) for i in ch_can_data['ch_492'] ],
-                                  [int(i) for i in ch_can_data['ch_251'] ],
-                                  [int(i) for i in ch_can_data['ch_355'] ],
-                                  [int(i) for i in ch_can_data['ch_489'] ],
-                                  [int(i) for i in ch_can_data['ch_201'] ],
-                                  [int(i) for i in ch_can_data['ch_1130'] ],
-                                  [int(i) for i in ch_can_data['ch_886'] ],
-                                  [int(i) for i in ch_can_data['ch_901'] ],
-                                  [int(i) for i in ch_can_data['ch_532'] ],
-                                  [int(i) for i in ch_can_data['ch_485'] ],
-                                  [int(i) for i in ch_can_data['ch_851'] ],
-                                  [int(i) for i in ch_can_data['ch_540'] ],
-                                  [int(i) for i in ch_can_data['ch_758'] ],
-                                  [int(i) for i in ch_can_data['ch_404'] ],
-                                  [int(i) for i in ch_can_data['ch_481'] ],
-                                  [int(i) for i in ch_can_data['ch_389'] ],
-                                  [int(i) for i in ch_can_data['ch_593'] ],
-                                  [int(i) for i in ch_can_data['ch_516'] ],
+    #print(obj_01_prob > 0.5) #(self.libController.long_out_isLeadVehDtct)
+    self.libController.app_step(  ch_can_data['ch_1046'],
+                                  ch_can_data['ch_858'],  ch_can_data['ch_677'],
+                                  ch_can_data['ch_175'],  ch_can_data['ch_481'],
+                                  ch_can_data['ch_562'],  ch_can_data['ch_1123'],
+                                  ch_can_data['ch_1130'],  ch_can_data['ch_588'],
+                                  ch_can_data['ch_1009'],  ch_can_data['ch_404'],
+                                  ch_can_data['ch_572'],  ch_can_data['ch_554'],
+                                  ch_can_data['ch_355'],  ch_can_data['ch_508'],
+                                  ch_can_data['ch_241'],  ch_can_data['ch_361'],
+                                  ch_can_data['ch_590'],  ch_can_data['ch_593'],
+                                  ch_can_data['ch_485'],  ch_can_data['ch_407'],
+                                  ch_can_data['ch_851'],  ch_can_data['ch_1345'],
+                                  ch_can_data['ch_201'],  ch_can_data['ch_1027'],
+                                  ch_can_data['ch_893'],  ch_can_data['ch_431'],
+                                  ch_can_data['ch_389'],  ch_can_data['ch_758'],
+                                  ch_can_data['ch_190'],  ch_can_data['ch_489'],
+                                  ch_can_data['ch_977'],  ch_can_data['ch_497'],
+                                  ch_can_data['ch_540'],  ch_can_data['ch_1146'],
+                                  ch_can_data['ch_398'],  ch_can_data['ch_251'],
+                                  ch_can_data['ch_1225'],  ch_can_data['ch_560'],
+                                  ch_can_data['ch_451'],  ch_can_data['ch_707'],
+                                  ch_can_data['ch_498'],  ch_can_data['ch_541'],
+                                  ch_can_data['ch_886'],  ch_can_data['ch_479'],
+                                  ch_can_data['ch_1344'],  ch_can_data['ch_795'],
+                                  ch_can_data['ch_492'],  ch_can_data['ch_516'],
                                   float(lat_plan.laneWidth),
                                   float(lat_plan.lProb),
                                   float(lat_plan.rProb),
@@ -213,26 +245,41 @@ class CarController():
                                   float(0.0),
                                   float(0.0),
                                   float(0.0),
-                                  bool(sm.valid),
-                                  bool(self.ctrlType),
+                                  bool(self.sm.valid),
+                                  bool(1),
                                   [float(i) for i in mpc_ypts],
-                                  [float(i) for i in mpc_headpts] )
+                                  [float(i) for i in mpc_headpts],
+                                  float(obj_01_prob), float(obj_01_dx), float(obj_01_dy), float(obj_01_v), float(obj_01_a) )
 
+    # utils sm-pm
+    # get lateral controls cmds
+    is_funcActv_bl = bool(self.libController.longt_out_isCtrlEngage) and bool(self.libController.Arb_is_LatCtrlActv_bl)
+    desired_curve_cmd = float(self.libController.mpc_plan_desCurve)
+    desired_accel_cmd = float(self.libController.longt_out_desAccelCtrlCmd)
 
-    # update rolling counter
-    RC = self.rolling_count
-    self.rolling_count +=1
-    if self.rolling_count >15:
-      self.rolling_count = 0
-    self.active_prev = bool(self.libController.Arb_is_LatCtrlActv_bl)
+    #print(sendData)
+    if self.RC % 1==0:
+      # send byted data commonds
+      setSpeedIpk = round(self.libController.longt_out_drvrSetIPKSpdV)
+      setSpeedIpk = min(255, setSpeedIpk)
+      setSpeedIpk = 0 if setSpeedIpk == 255 else setSpeedIpk
+      sendData = [0,0,0,0,0,0,0,0]+ [0,0,0,0,0,0,0,0]+ [self.RC/1, 1, int(is_funcActv_bl), 0] + \
+          [2, setSpeedIpk, int(self.libController.longt_out_drvrSetTmDistLvl), 0, 0 , 0, int(self.libController.long_out_isLeadVehDtct), 0, 0, 2 if bool(is_funcActv_bl) else 1] + [0 for i in range(22)]
+      sendBytes_arr = [int(x) for x in sendData]
 
-    return list(self.libController.FVCM_EPS_Frame)  + list(self.libController.FVCM_HMI_Frame) + [RC, 1, 0, 0]
+      single_data_bytes =  struct.pack("<ffffffff", float(desired_curve_cmd) , float(desired_accel_cmd),0,0,0,0,0,0);
 
-  def update_events(self, sm):
+      self.can_pm.send('control', single_data_bytes + bytes(sendBytes_arr))
+    # update Rolling counter
+    self.RC +=1
+    if self.RC > 15:
+      self.RC=0
+
+  def update_events(self):
 
     # Handle lane change
-    if sm['lateralPlan'].laneChangeState == LaneChangeState.preLaneChange:
-      direction = sm['lateralPlan'].laneChangeDirection
+    if self.sm['lateralPlan'].laneChangeState == LaneChangeState.preLaneChange:
+      direction = self.sm['lateralPlan'].laneChangeDirection
       if (self.CS.leftBlindspot and direction == LaneChangeDirection.left) or \
          (self.CS.rightBlindspot and direction == LaneChangeDirection.right):
         self.events.add(EventName.laneChangeBlocked)
@@ -241,20 +288,15 @@ class CarController():
           self.events.add(EventName.preLaneChangeLeft)
         else:
           self.events.add(EventName.preLaneChangeRight)
-    elif sm['lateralPlan'].laneChangeState in [LaneChangeState.laneChangeStarting,
+    elif self.sm['lateralPlan'].laneChangeState in [LaneChangeState.laneChangeStarting,
                                                  LaneChangeState.laneChangeFinishing]:
       self.events.add(EventName.laneChange)
 
-  def publish_log(self, sm, pm, frame, start_time):
-    ### publish control state and car state
-    debug_flag = bool(self.libController.Arb_is_LatCtrlActv_bl)
+  def publish_log(self, frame, start_time):
 
-    ''' tmp test for button enable disenabled .
-    # temp
-    if frame % 200 ==0:
-      self.debug_flag = not self.debug_flag
-    debug_flag = self.debug_flag
-    '''
+    ### publish control state and car state
+    debug_flag = bool(self.libController.Arb_is_LatCtrlActv_bl) and bool(self.libController.longt_out_isCtrlEngage)
+
     self.debug_flag = debug_flag
     self.current_alert_types = [ET.PERMANENT]
     # update car events
@@ -265,16 +307,17 @@ class CarController():
       self.events.add(EventName.buttonCancel)
 
     # update events
-    self.update_events(sm)
+    self.update_events()
 
     # update states
     self.state_transition()
     clear_event = ET.WARNING if ET.WARNING not in self.current_alert_types else None
-    alerts = self.events.create_alerts(self.current_alert_types, [self.CP, sm, True])
-    self.AM.add_many(frame, alerts, self.state)
+    alerts = self.events.create_alerts(self.current_alert_types, [self.CP, self.sm, True])
+    self.AM.add_many(frame, alerts)
     self.AM.process_alerts(frame, clear_event)
 
 
+    st = time.time()
     # controlsState
     dat = messaging.new_message('controlsState')
     dat.valid = True
@@ -286,8 +329,11 @@ class CarController():
     controlsState.alertBlinkingRate = self.AM.alert_rate
     controlsState.alertType = self.AM.alert_type
     controlsState.alertSound = self.AM.audible_alert
-
     controlsState.startMonoTime = int(start_time * 1e9)
+    dt = (time.time() - st)
+    if dt > 0.005:
+      print(dt)
+
 
     # normal signals
     controlsState.enabled = debug_flag
@@ -295,33 +341,32 @@ class CarController():
     controlsState.vPid = float(20)
     controlsState.state = self.state
 
-    current_curvature = (3.1416/180)*self.libController.VehCP_yr_VehDynYawRate_sg/max((self.libController.VehSpdAvgDrvn/3.6), 1)
+    current_curvature = (3.1416/180)*self.libController.m_VehCP_yr_VehDynYawRate_sg/max((self.libController.m_VehCP_V_VehSpdAvgDrvn_sg/3.6), 1)
     controlsState.curvature = float(current_curvature)
     controlsState.engageable = True
-    controlsState.vCruise = sm['deviceState'].freeSpacePercent
+    controlsState.vCruise = float(self.libController.longt_out_drvrSetIPKSpdV)  #sm['deviceState'].freeSpacePercent
+    controlsState.angleSteers = float(self.libController.m_VehCP_angD_StrgWhlAng_sg)
+    controlsState.steeringAngleDesiredDeg = float(self.libController.YRC_angD_ReqStrgWhlAng_sg)
 
-    #controlsState.angleSteers = float(self.libController.VehCP_angD_StrgWhlAng_sg)
-    #controlsState.steeringAngleDesiredDeg = float(self.libController.YRC_angD_ReqStrgWhlAng_sg)
-
-    pm.send('controlsState', dat)
+    self.pm.send('controlsState', dat)
 
     ### carState
     cs_send = messaging.new_message('carState')
     cs_send.valid = True
     carState = cs_send.carState
-    carState.vEgo = float(self.libController.VehSpdAvgDrvn/3.6)
-    carState.yawRate = float(self.libController.VehCP_yr_VehDynYawRate_sg)
-    carState.steeringAngleDeg = float(self.libController.VehCP_angD_StrgWhlAng_sg)
-    carState.steeringRateDeg = float(self.libController.VehCP_W_StrgWhlAngGrd_sg)
-    carState.steeringTorque = float(self.libController.VehCP_T_DrvrStrgDlvrdToq_sg)
-    carState.steeringTorqueEps = float(self.libController.VehCP_T_ChLKARespToq_sg)
+    carState.vEgo = float(self.libController.m_VehCP_V_VehSpdAvgDrvn_sg/3.6)
+    carState.yawRate = float(self.libController.m_VehCP_yr_VehDynYawRate_sg)
+    carState.steeringAngleDeg = float(self.libController.m_VehCP_angD_StrgWhlAng_sg)
+    carState.steeringRateDeg = float(self.libController.m_VehCP_W_StrgWhlAngGrd_sg)
+    carState.steeringTorque = float(self.libController.m_VehCP_T_DrvrStrgDlvrdToq_sg)
+    carState.steeringTorqueEps = float(self.libController.m_VehCP_T_ChLKARespToq_sg)
 
-    carState.leftBlinker = bool(self.libController.VehCP_is_LftStrgLmpOn_bl)
-    carState.rightBlinker = bool(self.libController.VehCP_is_RghtStrgLmpOn_bl)
+    carState.leftBlinker = bool(self.libController.m_VehCP_is_LftStrgLmpOn_bl)
+    carState.rightBlinker = bool(self.libController.m_VehCP_is_RghtStrgLmpOn_bl)
     # enabled default to auto lane change.
     carState.steeringPressed = True #bool(abs(self.libController.VehCP_T_DrvrStrgDlvrdToq_sg)>0.4)
-    carState.leftBlindspot = bool(self.libController.VehCP_LeftBSD_Warnning_u8)
-    carState.rightBlindspot = bool(self.libController.VehCP_RightBSD_Warnning_u8)
+    carState.leftBlindspot = bool(self.libController.m_VehCP_LeftBSD_Warnning_u8)
+    carState.rightBlindspot = bool(self.libController.m_VehCP_RightBSD_Warnning_u8)
 
     # car events
     car_events = self.events.to_msg()
@@ -329,15 +374,15 @@ class CarController():
 
     #copy to self.cs
     self.CS = carState
-    print(carState.steeringAngleDeg)
-    pm.send('carState', cs_send)
+    self.pm.send('carState', cs_send)
 
     # carParams - logged every 50 seconds (> 1 per segment)
     if (frame % int(50. / DT_CTRL) == 0):
       cp_send = messaging.new_message('carParams')
       cp_send.valid = True
       cp_send.carParams = self.CP
-      pm.send('carParams', cp_send)
+      self.pm.send('carParams', cp_send)
+
 
     # car control
     CC = car.CarControl.new_message()
@@ -345,53 +390,43 @@ class CarController():
     cc_send = messaging.new_message('carControl')
     cc_send.valid = True
     cc_send.carControl = CC
-    pm.send('carControl', cc_send)
-
+    self.pm.send('carControl', cc_send)
 
     # state varibales
     self.debug_flag_last = self.debug_flag
 
 def main():
     #config_realtime_process(3, Priority.CTRL_HIGH)
-    ### start sock zmq subscribe thread to update data
-    udp = STM32UDP()
-    udp.setDaemon(True)
-    udp.start()
 
     # controller and sub-pub message
     cc = CarController()
-    sm = messaging.SubMaster(['lateralPlan', 'liveCalibration', 'deviceState'])
-    pm = messaging.PubMaster(['controlsState', 'carState', 'carParams', 'carControl'])
-
 
     ### ratekeeper
-    rk = Ratekeeper(100, print_delay_threshold=None)
+    rk = Ratekeeper(50, print_delay_threshold=0.02)
     is_send = False
     frame = 0
 
     while True:
       start_time = sec_since_boot()
-      sm.update(0)
+      cc.sm.update(0)
+      cc.can_sm.update(0)
 
       ### update controller, 20ms
-      if is_send:
-        sendData = cc.update(udp, sm, pm)
-
-        # while udp socket with stm32 is conneted. we send control commands
-        try:
-          udp.server.sendto(b''.join(map(lambda x:int.to_bytes(x,1,'little'), sendData)), ('192.168.5.12', 9999) )
-        except:
-          pass
-
+      if is_send and cc.can_sm.data['ch_can'] is not None:
+        cc.update()
+      dt = (sec_since_boot() - start_time)
+      if dt > 0.01:
+        print(dt)
       ### publish logs, 10ms
-      cc.publish_log(sm, pm, frame, start_time)
-
+      #cc.publish_log(frame, start_time)
       ### keep realtime
       rk.keep_time()
 
       # update send flag
-      is_send = not is_send
+      is_send = True#not is_send
       frame += 1
 
+
+
 if __name__ == "__main__":
-    main()
+  main()

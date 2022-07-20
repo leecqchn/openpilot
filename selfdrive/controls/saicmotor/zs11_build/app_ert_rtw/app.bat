@@ -1,5 +1,5 @@
 
-set MATLAB=C:\Program Files\Polyspace\R2020b
+@if not "%MINGW_ROOT%" == "" (@set "PATH=%PATH%;%MINGW_ROOT%")
 
 cd .
 

@@ -1,0 +1,477 @@
+VERSION ""
+
+
+NS_ :
+	NS_DESC_
+	CM_
+	BA_DEF_
+	BA_
+	VAL_
+	CAT_DEF_
+	CAT_
+	FILTER
+	BA_DEF_DEF_
+	EV_DATA_
+	ENVVAR_DATA_
+	SGTYPE_
+	SGTYPE_VAL_
+	BA_DEF_SGTYPE_
+	BA_SGTYPE_
+	SIG_TYPE_REF_
+	VAL_TABLE_
+	SIG_GROUP_
+	SIG_VALTYPE_
+	SIGTYPE_VALTYPE_
+	BO_TX_BU_
+	BA_DEF_REL_
+	BA_REL_
+	BA_DEF_DEF_REL_
+	BU_SG_REL_
+	BU_EV_REL_
+	BU_BO_REL_
+	SG_MUL_VAL_
+
+BS_:
+
+BU_: FDR Gateway Diagnostics ECM SCS Tester SDM TCM vector__xxx
+
+
+BO_ 358 FVCM_HSC2_FrP01: 8 FVCM
+ SG_ FVCMBlkdHSC2 : 55|1@0+ (1,0) [0|1] ""  Gateway
+ SG_ FVCMFltStsHSC2 : 13|2@0+ (1,0) [0|3] ""  Gateway
+ SG_ LDWAdoWrnngDspCmdHSC2 : 39|2@0+ (1,0) [0|3] ""  Gateway
+ SG_ LDWSnstvtLvlHSC2 : 23|2@0+ (1,0) [0|3] ""  Gateway
+ SG_ LDWSysStsHSC2 : 10|3@0+ (1,0) [0|7] ""  Gateway
+
+BO_ 359 FVCM_HSC2_FrP02: 8 FVCM
+ SG_ AutoMainBeamLghtReqHSC2 : 15|2@0+ (1,0) [0|3] ""  Gateway
+ SG_ DistSinceTrgtCamrHSC2 : 7|8@0+ (8.235,-100) [-100|1999.92] "m"  Gateway
+ SG_ FVCMCalPrgsReqHSC2 : 36|3@0+ (1,0) [0|7] ""  Gateway
+ SG_ HandOffStrgWhlDetnStaHSC2 : 44|2@0+ (1,0) [0|3] ""  Gateway
+ SG_ HandOffStrgWhlDetnStaVHSC2 : 45|1@0+ (1,0) [0|1] ""  Gateway
+ SG_ LDWLKAAudReqHSC2 : 47|2@0+ (1,0) [0|3] ""  Gateway
+ SG_ LDWLKADspCmdHSC2 : 50|3@0+ (1,0) [0|7] ""  Gateway
+ SG_ LDWLKAHapticWrnngDspCmdHSC2 : 63|2@0+ (1,0) [0|3] ""  Gateway
+ SG_ LDWLKALVsulznReqHSC2 : 53|3@0+ (1,0) [0|7] ""  Gateway
+ SG_ LDWLKARVsulznReqHSC2 : 42|3@0+ (1,0) [0|7] ""  Gateway
+ SG_ LDWSysFltStsHSC2 : 39|3@0+ (1,0) [0|7] ""  Gateway
+ SG_ SpdAstCondStsCamrHSC2 : 11|4@0+ (1,0) [0|15] ""  Gateway
+ SG_ SpdAstReqStsCamrHSC2 : 13|2@0+ (1,0) [0|3] ""  Gateway
+ SG_ TJAICADspCmdHSC2 : 55|2@0+ (1,0) [0|3] ""  Gateway
+ SG_ TJAICASysFltStsHSC2 : 61|3@0+ (1,0) [0|7] ""  Gateway,Electronic_Power_System
+ SG_ TJAICASysStsHSC2 : 58|3@0+ (1,0) [0|7] ""  Gateway,Electronic_Power_System
+ SG_ TrgtSpdReqCamrHSC2 : 22|15@0+ (0.015625,0) [0|511.984] ""  Gateway
+
+BO_ 509 FVCM_HSC2_FrP03: 8 FVCM
+ SG_ FVCMSpdLmtValStsHSC2 : 45|3@0+ (1,0) [0|7] ""  Gateway
+ SG_ LDWLKAVbnLvlReqHSC2 : 23|2@0+ (1,0) [0|3] ""  Electronic_Power_System
+ SG_ LKAAlvRCHSC2 : 7|4@0+ (1,0) [0|15] "E=N*11"  Electronic_Power_System
+ SG_ LKADrvrTkovReqHSC2 : 46|1@0+ (1,0) [0|1] ""  Gateway
+ SG_ LKAReqToqHSC2 : 2|11@0+ (0.01,-10.24) [-10.24|10.23] "E=N*0.01-10.24Nm"  Electronic_Power_System
+ SG_ LKAReqToqPVHSC2 : 21|14@0+ (1,0) [0|16383] "E=N*1"  Electronic_Power_System
+ SG_ LKAReqToqStsHSC2 : 36|2@0+ (1,0) [0|3] ""  Electronic_Power_System
+ SG_ LKAReqToqVHSC2 : 3|1@0+ (1,0) [0|1] ""  Electronic_Power_System
+ SG_ LKASysFltStsHSC2 : 39|3@0+ (1,0) [0|7] ""  Gateway,Electronic_Power_System
+ SG_ LKASysStsHSC2 : 34|3@0+ (1,0) [0|7] ""  Gateway,Electronic_Power_System
+
+BO_ 492 EPS_HSC2_FrP03: 8 EPS
+ SG_ ChLKAAlvRCHSC2 : 7|4@0+ (1,0) [0|15] ""  FVCM
+ SG_ ChLKACtrlStsHSC2 : 54|3@0+ (1,0) [0|7] ""  FVCM
+ SG_ ChLKARespToqHSC2 : 2|11@0+ (0.01,-10.24) [-10.24|10.23] "Nm"  FVCM
+ SG_ ChLKARespToqPVHSC2 : 22|15@0+ (1,0) [0|32767] ""  FVCM
+ SG_ ChLKARespToqVHSC2 : 3|1@0+ (1,0) [0|1] ""  FVCM
+ SG_ DrvrStrgDlvrdToqHSC2 : 34|11@0+ (0.01,-10.24) [-10.24|10.23] "Nm"  FVCM
+ SG_ DrvrStrgDlvrdToqVHSC2 : 55|1@0+ (1,0) [0|1] ""  FVCM
+ SG_ EPSDMCInhibitHSC1 : 37|1@0+ (1,0) [0|1] ""  Gateway
+ SG_ StrgCustSetngAdjAvlblHSC1 : 38|1@0+ (1,0) [0|1] ""  Gateway
+ SG_ StrgCustSetngDspCmdHSC1 : 36|2@0+ (1,0) [0|3] ""  Gateway
+
+BO_ 516 RDA_HSC1_P02: 8 RDA
+ SG_ LBSDAndLCAWrnng_HS : 7|2@0+ (1,0) [0|3] ""  FVCM
+ SG_ RBSDAndLCAWrnng_HS : 5|2@0+ (1,0) [0|3] ""  FVCM
+ SG_ RDASysSta_HS : 23|5@0+ (1,0) [0|31] ""  FVCM
+
+
+BO_ 1948 DIAG_DTCInfo_Radar: 7 FDR
+ SG_ DTCInfomationRADAR_Safety : 7|56@0+ (1,0) [0|0] ""  Gateway
+
+
+BO_ 1852 DIAG_PhysResp_Radar: 8 FDR
+ SG_ DiagnosticRespRadar : 7|64@0+ (1,0) [0|0] ""  Diagnostics
+
+BO_ 364 FVCM_HSC2_FrP04: 8 FDR
+ SG_ ACCOtptShaftToqReqAlvRC_Safety : 7|4@0+ (1,0) [0|15] ""  vector__xxx
+ SG_ ACCOtptShaftToqReqSts_Safety : 23|2@0+ (1,0) [0|3] ""  vector__xxx
+ SG_ ACCOtptShaftToqReqVal_Safety : 3|12@0+ (2,-3392) [-3392|4798] "Nm"  vector__xxx
+ SG_ ACCOtptShaftToqReqValPV_Safety : 19|12@0+ (1,0) [0|4095] ""  vector__xxx
+
+BO_ 578 RADAR_HSC2_FrP00: 8 FDR
+ SG_ ACCAccReqSts_Safety : 29|2@0+ (1,0) [0|3] ""  ECM,SCS
+ SG_ ACCAccReqVal_Safety : 2|11@0+ (0.005,-7.22) [-7.22|3.015] ""  SCS
+ SG_ ACCGoReq_Safety : 30|1@0+ (1,0) [0|1] ""  Gateway,SCS
+ SG_ ACCSdslReq_Radar_Safety : 55|1@0+ (1,0) [0|1] ""  SCS
+ SG_ ACCSysAlvRlngCtr_SCS_Safety : 6|4@0+ (1,0) [0|15] ""  ECM,SCS
+ SG_ ACCSysChksm_SCS_Safety : 63|8@0+ (1,0) [0|255] ""  ECM,SCS
+ SG_ ACCSysFltSts_SCS_Safety : 42|3@0+ (1,0) [0|7] ""  SCS
+ SG_ ACCSysSts_Radar_Safety : 45|3@0+ (1,0) [0|7] ""  Gateway,ECM,SCS
+
+BO_ 580 RADAR_HSC2_FrP01: 8 FDR
+ SG_ ACCAEBBrkJerkLvlReq_Radar_Safety : 20|3@0+ (1,0) [0|7] ""  SCS
+ SG_ AEBAlvRlngCtr_SCS_Safety : 35|4@0+ (1,0) [0|15] ""  SCS
+ SG_ AEBChksm_SCS_Safety : 63|8@0+ (1,0) [0|255] ""  SCS
+ SG_ AEBDclReqSts_Safety : 25|2@0+ (1,0) [0|3] ""  ECM,SCS
+ SG_ AEBDclReqVal_Safety : 7|8@0+ (0.1,-12.7) [-12.7|12.8] "m/s^2"  SCS
+ SG_ AEBHydBrkAstLvlReq_Safety : 31|3@0+ (1,0) [0|7] ""  SCS
+ SG_ AEBPedtrnSysFltSts_Safety : 38|3@0+ (1,0) [0|7] ""  Gateway,ECM,SCS
+ SG_ AEBPedtrnSysSts_Safety : 28|3@0+ (1,0) [0|7] ""  Gateway,ECM,SCS
+ SG_ AEBPrflReq_Safety : 15|1@0+ (1,0) [0|1] ""  SCS
+ SG_ AEBSysFltSts_Radar_Safety : 47|3@0+ (1,0) [0|7] ""  Gateway,ECM,SCS
+ SG_ AEBSysSts_Radar_Safety : 23|3@0+ (1,0) [0|7] ""  Gateway,ECM,SCS
+
+BO_ 582 RADAR_HSC2_FrP02: 8 FDR
+ SG_ ACCDetObjDistLvl_Radar_Safety : 26|3@0+ (1,0) [0|7] ""  Gateway
+ SG_ ACCDrvrSeldTrgtDistLvl_Radar_Saf : 29|3@0+ (1,0) [0|7] ""  Gateway
+ SG_ ACCDrvrSelTrgtSpd_Radar_Safety : 6|15@0+ (0.015625,0) [0|511.984] ""  Gateway
+ SG_ ACCDrvrTkovReq_Safety : 39|1@0+ (1,0) [0|1] ""  Gateway
+ SG_ ACCGoNotfr_Radar_Safety : 35|1@0+ (1,0) [0|1] ""  Gateway
+ SG_ ACCMsgReq_Safety : 23|4@0+ (1,0) [0|15] ""  Gateway
+ SG_ ACCObjDet_Radar_Safety : 7|1@0+ (1,0) [0|1] ""  Gateway
+ SG_ ACCSysCanclReq_Radar_Safety : 31|2@0+ (1,0) [0|3] ""  Gateway
+ SG_ ACCSysFltSts_Radar_Safety : 38|3@0+ (1,0) [0|7] ""  Gateway,ECM
+ SG_ AEBDspCmd_Radar_Safety : 55|2@0+ (1,0) [0|3] ""  Gateway
+ SG_ AEBMsgReq_Safety : 19|4@0+ (1,0) [0|15] ""  Gateway
+ SG_ AEBPedtrnDspCmd_Safety : 47|2@0+ (1,0) [0|3] ""  Gateway
+ SG_ FCWDspCmd_Radar_Safety : 53|2@0+ (1,0) [0|3] ""  Gateway
+ SG_ FCWrnngSts_Radar_Safety : 51|3@0+ (1,0) [0|7] ""  Gateway
+ SG_ FCWSnstvtLvl_Radar_Safety : 45|3@0+ (1,0) [0|7] ""  Gateway
+ SG_ FCWSysFltSts_Radar_Safety : 42|3@0+ (1,0) [0|7] ""  Gateway
+ SG_ RadarCalPrgsReq_Safety : 34|3@0+ (1,0) [0|7] ""  Gateway
+
+BO_ 357 RADAR_HSC2_FVCM_FrP00: 8 FDR
+ SG_ ACCAlvRC_Safety : 51|4@0+ (1,0) [0|15] ""  ECM
+ SG_ ACCToqReqSts_Safety : 7|2@0+ (1,0) [0|3] ""  ECM
+ SG_ ACCToqReqVal_Safety : 19|12@0+ (0.5,-848) [-848|1199.5] "Nm"  ECM
+ SG_ ACCToqReqValPV_Safety : 39|16@0+ (1,0) [0|65535] ""  ECM
+
+BO_ 497 BCM_GW_SafetyC_FrP01: 8 Gateway
+ SG_ PwrMdMstrAccryA_H1_Safety : 2|1@0+ (1,0) [0|1] ""  FDR
+ SG_ PwrMdMstrRunCrkA_H1_Safety : 3|1@0+ (1,0) [0|1] ""  FDR
+ SG_ SysOpnlMd_Safety : 6|3@0+ (1,0) [0|7] ""  FDR
+ SG_ SysPwrMd_h1_Safety : 1|2@0+ (1,0) [0|3] ""  FDR
+ SG_ SysVol_Safety : 47|8@0+ (0.1,3) [3|28.5] "V"  FDR
+ SG_ SysVolMd_Safety : 58|2@0+ (1,0) [0|3] ""  FDR
+ SG_ SysVolMdV_Safety : 7|1@0+ (1,0) [0|1] ""  FDR
+ SG_ SysVolV_Safety : 32|1@0+ (1,0) [0|1] ""  FDR
+
+BO_ 1344 BCM_GW_SafetyC_FrP07: 8 Gateway
+ SG_ VehOdoV_H1_Safety : 31|1@0+ (1,0) [0|1] ""  FDR
+ SG_ VehOdo_H1_Safety : 7|24@0+ (1,0) [0|16777200] ""  FDR
+
+BO_ 1009 BCM_GW_SafetyC_FrP10: 8 Gateway
+ SG_ OtsdAirTemCrValV_H1_Safety : 48|1@0+ (1,0) [0|1] ""  FDR
+ SG_ OtsdAirTemCrVal_H1_Safety : 63|8@0+ (0.5,-40) [-40|87.5] "deg C"  FDR
+
+BO_ 1146 BCM_SafetyC_FrP03: 8 Gateway
+ SG_ FrtWiperParkPosA_Safety : 2|1@0+ (1,0) [0|1] ""  FDR
+ SG_ FrtWshrPumpA_Safety : 3|1@0+ (1,0) [0|1] ""  FDR
+
+BO_ 1130 BCM_SafetyC_FrP04: 8 Gateway
+ SG_ BntOpenSts_H1_Safety : 45|2@0+ (1,0) [0|3] ""  FDR
+ SG_ DipdBeamLghtOn_Safety : 63|1@0+ (1,0) [0|1] ""  FDR
+ SG_ DircnIndLampSwSts_Safety : 60|2@0+ (1,0) [0|3] ""  FDR
+ SG_ DrvrDoorOpenSts_H1_Safety : 47|2@0+ (1,0) [0|3] ""  FDR
+ SG_ FrtFogLghtOn_H1_Safety : 62|1@0+ (1,0) [0|1] ""  FDR
+ SG_ FrtPsngDoorOpenSts_H1_Safety : 43|2@0+ (1,0) [0|3] ""  FDR
+ SG_ LDircnIO_Safety : 37|1@0+ (1,0) [0|1] ""  FDR
+ SG_ LdspcOpenSts_H1_Safety : 33|2@0+ (1,0) [0|3] ""  FDR
+ SG_ MainBeamLghtOn_H1_Safety : 36|1@0+ (1,0) [0|1] ""  FDR
+ SG_ RDircnIO_Safety : 38|1@0+ (1,0) [0|1] ""  FDR
+ SG_ RRDoorOpenSts_Safety : 41|2@0+ (1,0) [0|3] ""  FDR
+ SG_ RrFogLghtOn_H1_Safety : 39|1@0+ (1,0) [0|1] ""  FDR
+ SG_ VehSideLghtSts_H1_Safety : 52|2@0+ (1,0) [0|3] ""  FDR
+
+BO_ 540 BCM_SafetyC_FrP06: 8 Gateway
+ SG_ FrtWiperSwSts_H1_Safety : 47|2@0+ (1,0) [0|3] ""  FDR
+ SG_ LDircnIndLghtF_H1_Safety : 21|1@0+ (1,0) [0|1] ""  FDR
+ SG_ RDircnIndLghtF_H1_Safety : 17|1@0+ (1,0) [0|1] ""  FDR
+ SG_ RrDoorsOpenSts_Safety : 63|2@0+ (1,0) [0|3] ""  FDR
+
+BO_ 241 BCM_SafetyC_FrP07: 8 Gateway
+ SG_ BrkPdlPos_Safety : 15|8@0+ (0.392156,0) [0|99.9998] "%"  FDR
+ SG_ BrkPdlPosV_Safety : 26|1@0+ (1,0) [0|1] ""  FDR
+
+BO_ 541 BCM_SafetyC_FrP09: 8 Gateway
+ SG_ KeyDetIndx_Safety : 6|3@0+ (1,0) [0|7] ""  FDR
+
+BO_ 2015 DIAG_FuncReq_HSC2: 8 Diagnostics
+ SG_ DiagnosticFuncAddrReq_Safety : 7|64@0+ (1,0) [0|0] ""  FDR
+
+BO_ 1844 DIAG_PhysReq_Radar: 8 Diagnostics
+ SG_ DiagnosticReqRadar_Safety : 7|64@0+ (1,0) [0|0] ""  FDR
+
+BO_ 201 ECM_HSC1_FrP00: 8 ECM
+ SG_ AccelActuPos_Safety : 39|8@0+ (0.392157,0) [0|100] "%"  FDR
+ SG_ AccelActuPosV_Safety : 31|1@0+ (1,0) [0|1] ""  FDR
+ SG_ CCA_Safety : 30|1@0+ (1,0) [0|1] ""  FDR
+ SG_ CCEnbd_Safety : 29|1@0+ (1,0) [0|1] ""  FDR
+ SG_ ECM_FrP00_Checksum_Safety : 63|8@0+ (1,0) [0|255] ""  FDR
+ SG_ ECM_FrP00_RollingCounter_Safety : 51|4@0+ (1,0) [0|15] ""  FDR
+ SG_ En12VoltStrMotCmddOn_Safety : 53|1@0+ (1,0) [0|1] ""  FDR
+ SG_ EnCtrlrRunCrkTrmlSts_Safety : 52|1@0+ (1,0) [0|1] ""  FDR
+ SG_ EnRunA_Safety : 7|1@0+ (1,0) [0|1] ""  FDR
+ SG_ EnSpd_Safety : 15|16@0+ (0.25,0) [0|16383.8] "rpm"  FDR
+ SG_ EnSpdSts_Safety : 1|2@0+ (1,0) [0|3] ""  FDR
+ SG_ EnSpReqToTr_Safety : 28|1@0+ (1,0) [0|1] ""  FDR
+ SG_ PtBrkPdlDscrtInptSts_Safety : 40|1@0+ (1,0) [0|1] ""  FDR
+ SG_ PtBrkPdlDscrtInptStsV_Safety : 41|1@0+ (1,0) [0|1] ""  FDR
+ SG_ PtCrkAbotd_Safety : 5|1@0+ (1,0) [0|1] ""  FDR
+ SG_ PtRunAbotd_Safety : 4|1@0+ (1,0) [0|1] ""  FDR
+ SG_ RVSEnRunning_Safety : 55|1@0+ (1,0) [0|1] ""  FDR
+ SG_ RVSPtCrkAbotd_Safety : 2|1@0+ (1,0) [0|1] ""  FDR
+ SG_ RVSPtRunAbotd_Safety : 3|1@0+ (1,0) [0|1] ""  FDR
+
+BO_ 190 ECM_HSC1_FrP01: 3 ECM
+ SG_ AccelEfctvPos_Safety : 23|8@0+ (0.392157,0) [0|100] "%"  FDR
+
+BO_ 398 ECM_HSC1_FrP02: 8 ECM
+ SG_ PtACCA_Safety : 7|1@0+ (1,0) [0|1] ""  FDR
+
+BO_ 451 ECM_HSC1_FrP03: 8 ECM
+ SG_ ECM_FrP03_Checksum_Safety : 63|8@0+ (1,0) [0|255] ""  FDR
+ SG_ ECM_FrP03_RollingCounter_Safety : 51|4@0+ (1,0) [0|15] ""  FDR
+ SG_ EnIdleCtrlSts_Safety : 54|1@0+ (1,0) [0|1] ""  FDR
+ SG_ EnToqActuExtdRng_Safety : 3|12@0+ (0.5,-848) [-848|1199.5] "Nm"  FDR
+ SG_ EnToqActuExtdRngV_Safety : 4|1@0+ (1,0) [0|1] ""  FDR
+ SG_ EnToqDrvrReqdExtdRng_Safety : 19|12@0+ (0.5,-848) [-848|1199.5] "Nm"  FDR
+ SG_ EnToqDrvrReqdExtdRngV_Safety : 20|1@0+ (1,0) [0|1] ""  FDR
+ SG_ EnToqRducnFlrSts_Safety : 7|3@0+ (1,0) [0|7] ""  FDR
+ SG_ ThrtlActuPos_Safety : 47|8@0+ (0.392157,0) [0|39.2157] "%"  FDR
+ SG_ ThrtlPosActuV_Safety : 55|1@0+ (1,0) [0|1] ""  FDR
+
+BO_ 404 ECM_HSC1_FrP04: 8 ECM
+ SG_ AutocTrCmddGear_Safety : 11|4@0+ (1,0) [0|15] ""  FDR
+ SG_ ClPos_Safety : 63|8@0+ (0.392157,0) [0|100] "%"  FDR
+ SG_ ClPosV_Safety : 55|1@0+ (1,0) [0|1] ""  FDR
+ SG_ ClStSwA_Safety : 37|1@0+ (1,0) [0|1] ""  FDR
+ SG_ ClStSwAV_Safety : 38|1@0+ (1,0) [0|1] ""  FDR
+ SG_ TrEstdGear_Safety : 3|4@0+ (1,0) [0|15] ""  FDR
+ SG_ TrEstdGearV_Safety : 4|1@0+ (1,0) [0|1] ""  FDR
+ SG_ TrShftLvrPos_Safety : 27|4@0+ (1,0) [0|15] ""  FDR
+ SG_ TrShftLvrPosV_Safety : 28|1@0+ (1,0) [0|1] ""  FDR
+ SG_ TrShftPtrnASts_Safety : 44|3@0+ (1,0) [0|7] ""  FDR
+ SG_ TrTapUpTapDwnMdSts_Safety : 41|2@0+ (1,0) [0|3] ""  FDR
+
+BO_ 479 ECM_HSC1_FrP07: 2 ECM
+ SG_ EnASSSta_Safety : 1|2@0+ (1,0) [0|3] ""  FDR
+
+BO_ 707 ECM_HSC1_FrP09: 8 ECM
+ SG_ ECM_FrP09_Checksum_Safety : 63|8@0+ (1,0) [0|255] ""  FDR
+ SG_ ECM_FrP09_RollingCounter_Safety : 51|4@0+ (1,0) [0|15] ""  FDR
+ SG_ EcoDrvngAIO_Safety : 23|1@0+ (1,0) [0|1] ""  FDR
+ SG_ EcoDrvngDspStsGearSIS_Safety : 6|2@0+ (1,0) [0|3] ""  FDR
+ SG_ EcoDrvngDspStsRcmndFG_Safety : 55|4@0+ (1,0) [0|15] ""  FDR
+ SG_ ECODrvngSpdRutA_Safety : 21|1@0+ (1,0) [0|1] ""  FDR
+ SG_ EnToqMaxExtdRng_Safety : 3|12@0+ (0.5,-848) [-848|1199.5] "Nm"  FDR
+ SG_ EnToqMaxExtdRngV_Safety : 4|1@0+ (1,0) [0|1] ""  FDR
+ SG_ EnToqMinExtdRng_Safety : 19|12@0+ (0.5,-848) [-848|1199.5] "Nm"  FDR
+ SG_ EnToqMinExtdRngV_Safety : 20|1@0+ (1,0) [0|1] ""  FDR
+
+BO_ 977 ECM_HSC1_FrP12: 8 ECM
+ SG_ EnEmsnRltdMalfA_Safety : 4|1@0+ (1,0) [0|1] ""  FDR
+ SG_ EnNonEmsnRltdMalfA_Safety : 3|1@0+ (1,0) [0|1] ""  FDR
+
+BO_ 251 ECM_HSC1_FrP27: 8 ECM
+ SG_ AccelOvrd_Safety : 19|1@0+ (1,0) [0|1] ""  FDR
+ SG_ PtACCToqReqResp_Safety : 4|3@0+ (1,0) [0|7] ""  FDR
+ SG_ PtACCToqReqRespPV_Safety : 43|4@0+ (1,0) [0|15] "count value"  FDR
+ SG_ PtADASAlvRC_Safety : 47|4@0+ (1,0) [0|15] "count value"  FDR
+
+BO_ 886 FICM_SafetyC_FrP02: 8 Gateway
+ SG_ RstrFctryDeftsReq_Safety : 56|1@0+ (1,0) [0|1] ""  FDR
+
+BO_ 758 FICM_SafetyC_FrP08: 8 Gateway
+ SG_ AEBPedtrnSwReq_Safety : 57|2@0+ (1,0) [0|3] ""  FDR
+ SG_ AEBSwReq_Safety : 55|2@0+ (1,0) [0|3] ""  FDR
+ SG_ FCWSnstvtLvlReq_Safety : 53|3@0+ (1,0) [0|7] ""  FDR
+ SG_ FCWSwReq_Safety : 43|2@0+ (1,0) [0|3] ""  FDR
+
+BO_ 1027 FICM_SafetyC_FrP09: 8 Gateway
+ SG_ FICMPosngSysLatd_Safety : 0|25@0- (1E-005,0) [-90|90] "degree"  FDR
+ SG_ FICMPosngSysLongd_Safety : 33|26@0- (1E-005,0) [-180|180] "degree"  FDR
+
+BO_ 893 FICM_SafetyC_FrP14: 8 Gateway
+ SG_ FICMPosngSysDircn_Safety : 16|9@0+ (1,0) [0|511] ""  FDR
+
+BO_ 795 GW_HSC2_FrP09: 8 Tester
+ SG_ VehDrvngMd_Safety : 29|3@0+ (1,0) [0|7] ""  FDR
+
+BO_ 361 GW_SafetyC_FrP00: 6 Gateway
+ SG_ BCMAvlbly_Safety_Safety : 31|1@0+ (1,0) [0|1] ""  FDR
+ SG_ EPSAvlbly_Safety_Safety : 1|1@0+ (1,0) [0|1] ""  FDR
+ SG_ FICMAvlbly_Safety_Safety : 25|1@0+ (1,0) [0|1] ""  FDR
+ SG_ IPCAvlbly_Safety_Safety : 30|1@0+ (1,0) [0|1] ""  FDR
+
+BO_ 175 HCU_Safety_FrP00: 8 Tester
+ SG_ EPTAccelActuPos_Safety : 7|8@0+ (0.392157,0) [0|100] "%"  FDR
+ SG_ EPTAccelActuPosV_Safety : 43|1@0+ (1,0) [0|1] ""  FDR
+
+BO_ 498 IPK_BCM_SafetyC_FrP07: 2 Gateway
+ SG_ SysBPM_Safety : 5|2@0+ (1,0) [0|3] ""  FDR
+ SG_ SysBPMEnbd_Safety : 6|1@0+ (1,0) [0|1] ""  FDR
+
+BO_ 481 IPK_GW_SafetyC_FrP04: 7 Gateway
+ SG_ CCSwStsAlvRC_Safety : 17|2@0+ (1,0) [0|3] ""  FDR
+ SG_ CCSwStsCanclSwA_Safety : 7|1@0+ (1,0) [0|1] ""  FDR
+ SG_ CCSwStsDistDecSwA_Safety : 18|1@0+ (1,0) [0|1] ""  FDR
+ SG_ CCSwStsDistIncSwA_Safety : 19|1@0+ (1,0) [0|1] ""  FDR
+ SG_ CCSwStsOnSwA_Safety : 6|1@0+ (1,0) [0|1] ""  FDR
+ SG_ CCSwStsPV_Safety : 15|8@0+ (1,0) [0|255] ""  FDR
+ SG_ CCSwStsRsmSwA_Safety : 5|1@0+ (1,0) [0|1] ""  FDR
+ SG_ CCSwStsSetSwA_Safety : 4|1@0+ (1,0) [0|1] ""  FDR
+ SG_ CCSwStsSpdDecSwA_Safety : 2|1@0+ (1,0) [0|1] ""  FDR
+ SG_ CCSwStsSpdIncSwA_Safety : 3|1@0+ (1,0) [0|1] ""  FDR
+ SG_ CCSwStsSwDataIntgty_Safety : 1|2@0+ (1,0) [0|3] ""  FDR
+
+BO_ 1046 IPK_SafetyC_FrP03: 8 Gateway
+ SG_ DspMeasSys_Safety : 29|1@0+ (1,0) [0|1] ""  FDR
+
+BO_ 858 IPK_SafetyC_FrP04: 8 Gateway
+ SG_ ClstrDspdVehSpd_Safety : 47|8@0+ (1,0) [0|254] "km/h"  FDR
+
+BO_ 1345 IPK_SafetyC_FrP06: 8 Gateway
+ SG_ CalendarDay_Safety : 20|5@0+ (1,0) [0|31] "days"  FDR
+ SG_ CalendarMonth_Safety : 11|4@0+ (1,0) [0|15] ""  FDR
+ SG_ CalendarYear_Safety : 7|8@0+ (1,2000) [2000|2255] "year"  FDR
+ SG_ HourOfDay_Safety : 28|5@0+ (1,0) [0|23] ""  FDR
+ SG_ MinuteOfHour_Safety : 37|6@0+ (1,0) [0|59] ""  FDR
+ SG_ SecsOfMinute_Safety : 45|6@0+ (1,0) [0|59] ""  FDR
+
+BO_ 1123 IPK_SafetyC_FrP07: 4 Gateway
+ SG_ ParkBrkSwA_Safety : 24|1@0+ (1,0) [0|1] ""  FDR
+
+BO_ 485 SAS_SafetyC_FrP00: 8 Gateway
+ SG_ StrgWhlAng_Safety : 15|16@0+ (0.0625,-2048) [-2048|2047.88] "degree"  FDR
+ SG_ StrgWhlAngAlvRC_Safety : 31|4@0+ (1,0) [0|15] ""  FDR
+ SG_ StrgWhlAngExtdPV_Safety : 47|16@0+ (1,0) [0|65535] ""  FDR
+ SG_ StrgWhlAngGrd_Safety : 27|12@0+ (1,-2048) [-2048|2046] "degree/s"  FDR
+ SG_ StrgWhlAngSnsrCalSts_Safety : 6|2@0+ (1,0) [0|3] ""  FDR
+ SG_ StrgWhlAngSnsrChksm_Safety : 63|8@0+ (1,0) [0|255] ""  FDR
+ SG_ StrgWhlAngSnsrFlt_Safety : 0|1@0+ (1,0) [0|1] ""  FDR
+ SG_ StrgWhlAngSnsrInid_Safety : 2|1@0+ (1,0) [0|1] ""  FDR
+ SG_ StrgWhlAngSnsrMultCapb_Safety : 1|1@0+ (1,0) [0|1] ""  FDR
+ SG_ StrgWhlAngV_Safety : 7|1@0+ (1,0) [0|1] ""  FDR
+
+BO_ 560 SCS_HSC2_EPB_FrP00: 8 SCS
+ SG_ EPBCCCanclReqd_Safety : 28|1@0+ (1,0) [0|1] ""  FDR
+ SG_ EPBSts_Safety_Safety : 13|2@0+ (1,0) [0|3] ""  FDR
+
+BO_ 554 SCS_HSC2_EPB_FrP01: 2 SCS
+ SG_ EPBAppcnStsPV_Safety_Safety : 13|2@0+ (1,0) [0|3] ""  FDR
+ SG_ EPBAppcnSts_Safety_Safety : 15|2@0+ (1,0) [0|3] ""  FDR
+
+BO_ 389 SCS_HSC2_FrP02: 8 SCS
+ SG_ VSEAlvRlngCtr_Safety : 51|4@0+ (1,0) [0|15] ""  FDR
+ SG_ VSEChksm_Safety : 63|8@0+ (1,0) [0|255] ""  FDR
+ SG_ VSELatAccV_Safety_Safety : 3|1@0+ (1,0) [0|1] ""  FDR
+ SG_ VSELatAcc_Safety_Safety : 19|12@0- (0.015625,0) [-32|31.9844] "m/s^2"  FDR
+ SG_ VSELongtAccV_Safety_Safety : 2|1@0+ (1,0) [0|1] ""  FDR
+ SG_ VSELongtAcc_Safety_Safety : 1|10@0- (0.03,0) [-15.36|15.33] ""  FDR
+
+BO_ 489 SCS_HSC2_FrP05: 8 SCS
+ SG_ ABSAAlvRlngCtr_Safety : 55|4@0+ (1,0) [0|15] ""  FDR
+ SG_ ABSAChksm_Safety : 63|8@0+ (1,0) [0|255] ""  FDR
+ SG_ ABSA_Safety_Safety : 30|1@0+ (1,0) [0|1] ""  FDR
+ SG_ ABSF_Safety_Safety : 29|1@0+ (1,0) [0|1] ""  FDR
+ SG_ ACCBrkngA_Safety : 31|1@0+ (1,0) [0|1] ""  FDR
+ SG_ EnDragToqRducnA_Safety_Safety : 25|1@0+ (1,0) [0|1] ""  FDR
+ SG_ TCSA_Safety_Safety : 28|1@0+ (1,0) [0|1] ""  FDR
+ SG_ VehDynYawRateV_Safety_Safety : 36|1@0+ (1,0) [0|1] ""  FDR
+ SG_ VehDynYawRate_Safety_Safety : 35|12@0- (0.0625,0) [-128|127.938] "deg/sec"  FDR
+ SG_ VSESysA_Safety_Safety : 24|1@0+ (1,0) [0|1] ""  FDR
+
+BO_ 562 SCS_HSC2_FrP06: 8 SCS
+ SG_ HDCSysSts_Safety_Safety : 55|3@0+ (1,0) [0|7] ""  FDR
+
+BO_ 508 SCS_HSC2_FrP08: 8 SCS
+ SG_ ChSysTotBrkAxleToqVal_Safety : 37|14@0+ (2,0) [0|32766] ""  FDR
+ SG_ ChSysTotBrkAxleToqValV_Safety : 38|1@0+ (1,0) [0|1] ""  FDR
+
+
+BO_ 851 SCS_HSC2_FrP15: 8 SCS
+ SG_ VehSpdAvgDrvnV_Safety_Safety : 7|1@0+ (1,0) [0|1] ""  FDR
+ SG_ VehSpdAvgDrvn_Safety_Safety : 6|15@0+ (0.015625,0) [0|511.984] "km/h"  FDR
+ SG_ VehSpdAvgNonDrvnV_Safety_Safety : 39|1@0+ (1,0) [0|1] ""  FDR
+ SG_ VehSpdAvgNonDrvn_Safety_Safety : 38|15@0+ (0.015625,0) [0|511.984] "km/h"  FDR
+
+BO_ 572 SCS_HSC2_FrP19: 8 SCS
+ SG_ VehSpdAvgAlvRC_Safety_Safety : 39|4@0+ (1,0) [0|15] "count value"  FDR
+ SG_ VehSpdAvgPV_Safety_Safety : 7|16@0+ (1,0) [0|65535] ""  FDR
+ SG_ VehSpdAvgV_Safety_Safety : 23|1@0+ (1,0) [0|1] ""  FDR
+ SG_ VehSpdAvg_Safety_Safety : 22|15@0+ (0.015625,0) [0|511.984] "km/h"  FDR
+
+BO_ 588 SCS_HSC2_FrP22: 8 SCS
+ SG_ BrkDiscTemSts_Safety : 6|1@0+ (1,0) [0|1] ""  FDR
+ SG_ BrkPdlDrvrAppdPrsAlvRC_Radar_Saf : 13|2@0+ (1,0) [0|3] ""  FDR
+ SG_ BrkPdlDrvrAppdPrsV_Radar_Safety : 7|1@0+ (1,0) [0|1] ""  FDR
+ SG_ BrkPdlDrvrAppdPrs_Radar_Safety : 23|8@0+ (75,0) [0|19125] "kPa"  FDR
+ SG_ LDrvnWhlRotlDircn_Safety_Safety : 15|2@0+ (1,0) [0|3] ""  FDR
+ SG_ RDrvnWhlRotlDircn_Safety_Safety : 2|2@0+ (1,0) [0|3] ""  FDR
+ SG_ WhlBrkPrsSts_Safety : 5|1@0+ (1,0) [0|1] ""  FDR
+ SG_ WhlGndVelDrvnChksm_Radar_Safety : 63|8@0+ (1,0) [0|255] ""  FDR
+ SG_ WhlGndVelDrvnRC_Radar_Safety : 11|4@0+ (1,0) [0|15] ""  FDR
+ SG_ WhlGndVelLDrvnV_Radar_Safety : 3|1@0+ (1,0) [0|1] ""  FDR
+ SG_ WhlGndVelLDrvn_Radar_Safety : 45|14@0+ (0.03125,0) [0|511.969] "km/h"  FDR
+ SG_ WhlGndVelRDrvnV_Radar_Safety : 4|1@0+ (1,0) [0|1] ""  FDR
+ SG_ WhlGndVelRDrvn_Radar_Safety : 29|14@0+ (0.03125,0) [0|511.969] "km/h"  FDR
+
+BO_ 590 SCS_HSC2_FrP23: 8 SCS
+ SG_ LNonDrvnWhlRotlDircn_Radar_Safet : 17|2@0+ (1,0) [0|3] ""  FDR
+ SG_ RNonDrvnWhlRotlDircn_Radar_Safet : 9|2@0+ (1,0) [0|3] ""  FDR
+ SG_ TCSOpngMd_Radar_Safety : 20|3@0+ (1,0) [0|7] ""  FDR
+ SG_ TCSOpngSts_Radar_Safety : 23|3@0+ (1,0) [0|7] ""  FDR
+ SG_ VSEMd_Radar_Safety : 12|3@0+ (1,0) [0|7] ""  FDR
+ SG_ VSESts_Radar_Safety : 15|3@0+ (1,0) [0|7] ""  FDR
+ SG_ WhlGndVelLNonDrvnV_Radar_Safety : 30|1@0+ (1,0) [0|1] ""  FDR
+ SG_ WhlGndVelLNonDrvn_Radar_Safety : 45|14@0+ (0.03125,0) [0|511.969] "km/h"  FDR
+ SG_ WhlGndVelNonDrvnChksm_Radar_Safe : 63|8@0+ (1,0) [0|255] ""  FDR
+ SG_ WhlGndVelNonDrvnRC_Radar_Safety : 7|4@0+ (1,0) [0|15] ""  FDR
+ SG_ WhlGndVelRNonDrvnV_Radar_Safety : 31|1@0+ (1,0) [0|1] ""  FDR
+ SG_ WhlGndVelRNonDrvn_Radar_Safety : 29|14@0+ (0.03125,0) [0|511.969] "km/h"  FDR
+
+BO_ 593 SCS_HSC2_FrP24: 8 SCS
+ SG_ ChACCAccReqResp_Safety : 5|3@0+ (1,0) [0|7] ""  FDR
+ SG_ ChACCAEBAlvRlngCtr_Radar_Safety : 20|4@0+ (1,0) [0|15] ""  FDR
+ SG_ ChACCAEBChksm_Radar_Safety : 63|8@0+ (1,0) [0|255] ""  FDR
+ SG_ ChACCReqFlrSts_Safety : 15|2@0+ (1,0) [0|3] ""  FDR
+ SG_ ChAEBBrkJerkReqResp_Safety : 10|3@0+ (1,0) [0|7] ""  FDR
+ SG_ ChAEBDclReqResp_Safety : 23|3@0+ (1,0) [0|7] ""  FDR
+ SG_ ChAEBHydBrkAstReqResp_Safety : 2|3@0+ (1,0) [0|7] ""  FDR
+ SG_ ChAEBPrflReqResp_Safety : 13|3@0+ (1,0) [0|7] ""  FDR
+ SG_ VehSdslSts_Safety : 7|2@0+ (1,0) [0|3] ""  FDR
+ SG_ VehTrgtLongtAcc_Safety : 31|8@0+ (0.05,-7) [-7|5.75] ""  FDR
+
+BO_ 355 SDM_HSC1_FrP00: 8 SDM
+ SG_ AirbagDpl_Safety : 11|1@0+ (1,0) [0|1] ""  FDR
+ SG_ AirbagDplInvsn_Safety : 10|1@0+ (1,0) [0|1] ""  FDR
+ SG_ DrvrSbltAtc_Safety : 12|1@0+ (1,0) [0|1] ""  FDR
+ SG_ DrvrSbltAtcV_Safety : 13|1@0+ (1,0) [0|1] ""  FDR
+ SG_ SDMRC_Safety : 1|2@0+ (1,0) [0|3] ""  FDR
+
+BO_ 431 TCM_HSC1_FrP03: 8 TCM
+ SG_ AutocTrGearShftDircn_Safety : 18|2@0+ (1,0) [0|3] ""  FDR
+ SG_ AutocTrGearShftDircnF_Safety : 16|1@0+ (1,0) [0|1] ""  FDR
+
+BO_ 677 TCM_HSC1_FrP07: 8 TCM
+ SG_ TrCCCanclReq_Safety : 44|1@0+ (1,0) [0|1] ""  FDR
+
+BO_ 1225 TCM_HSC1_FrP09: 7 TCM
+ SG_ TrClThrmlProtnNotfn_Safety : 35|4@0+ (1,0) [0|15] ""  FDR
+ SG_ TrEmsnRltdMalfA_Safety : 5|1@0+ (1,0) [0|1] ""  FDR
+ SG_ TrEstdClCldnTemTrgtDsp_Safety : 55|8@0+ (0.392157,0) [0|100] ""  FDR
+ SG_ TrEstdClTemDsp_Safety : 47|8@0+ (0.392157,0) [0|100] ""  FDR
+ SG_ TrNonEmsnRltdMalfA_Safety : 4|1@0+ (1,0) [0|1] ""  FDR
+
+BO_ 407 TCM_HSC1_FrP11: 4 TCM
+ SG_ TrGear_Safety : 17|10@0+ (0.03125,0) [0|31.9688] ""  FDR
+ SG_ TrGearV_Safety : 23|1@0+ (1,0) [0|1] ""  FDR
+

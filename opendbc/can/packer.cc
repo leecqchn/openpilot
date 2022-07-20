@@ -33,54 +33,6 @@ static uint64_t set_value(uint64_t ret, const Signal& sig, int64_t ival) {
   return ret;
 }
 
-
-static uint64_t  get_value(uint64_t x, uint8_t start_bit, uint8_t length) {
-    // mask value
-    uint64_t dat = 1;
-    for ( int i=0; i< length; i++) {
-      dat  = dat*2;
-    }
-    dat -= 1;
-
-    // caculate start index with reverse order
-    uint8_t idx  = start_bit / 8 ;
-    uint8_t offset = start_bit - idx * 8 ;
-
-    uint8_t idx_ = idx * 8 + 8 - offset;
-    idx_ = idx_-1;
-
-
-    //
-    uint64_t k = ( (  x << (idx_-length+1) ) >> (idx_-length+1) )  >> (63 - idx_);
-
-    //uint64_t k = ( x >> (63 - idx_) )  & dat;
-
-
-    return k;
-
-
-}
-
-
-static uint64_t get_PV_check(uint64_t x) {
-
-  uint64_t x_rev = x;//ReverseBytes(x);
-
-  uint64_t PV_data = 0;
-
-  PV_data += 4096 * get_value(x_rev, 35, 2);
-  PV_data += 2 * get_value(x_rev, 8, 11);
-  PV_data += 1 * get_value(x_rev, 3, 1);
-  PV_data += get_value(x_rev, 4, 4);
-  PV_data = PV_data ^ 0x3fffull;
-  PV_data +=1;
-
-  return PV_data;
-
-}
-
-
-
 CANPacker::CANPacker(const std::string& dbc_name) {
   dbc = dbc_lookup(dbc_name);
   assert(dbc);
@@ -115,35 +67,6 @@ uint64_t CANPacker::pack(uint32_t address, const std::vector<SignalPackValue> &s
 
     ret = set_value(ret, sig, ival);
   }
-
-  // deal with message address with 509, generate pv checksum, only use for saicmotor_mgzs
-  if (address == 509 ) {
-    uint64_t pv = 0;
-    /*
-    WARN("ret data is %lu.\n", ret);
-    WARN("byte0 is %llu.\n", (ret & 0x00000000000000ffull));
-    WARN("byte1 is %llu.\n", (ret & 0x000000000000ff00ull) >> 8);
-    WARN("byte2 is %llu.\n", (ret & 0x0000000000ff0000ull) >> 16);
-    WARN("byte3 is %llu.\n", (ret & 0x00000000ff000000ull) >> 24);
-    WARN("byte4 is %llu.\n", (ret & 0x000000ff00000000ull) >> 32);
-    WARN("byte5 is %llu.\n", (ret & 0x0000ff0000000000ull) >> 40);
-    WARN("byte6 is %llu.\n", (ret & 0x00ff000000000000ull) >> 48);
-    WARN("byte7 is %llu.\n", (ret & 0xff00000000000000ull) >> 56);
-    */
-    pv = get_PV_check(ret);
-    //WARN("pv data is %lu.\n", pv);
-
-    auto sig_it = signal_lookup.find(std::make_pair(address, std::string("LKAReqToqPVHSC2")));
-
-    if (sig_it == signal_lookup.end()) {
-      WARN("undefined signal %s - %d\n", std::string("LKAReqToqPVHSC2").c_str(), address);
-    } else {
-      const auto& sig = sig_it->second;
-      ret = set_value(ret, sig, pv);
-    }
-
-  }
-
 
   if (counter >= 0){
     auto sig_it = signal_lookup.find(std::make_pair(address, "COUNTER"));

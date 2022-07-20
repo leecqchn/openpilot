@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import os
 import numpy as np
-
+from common.kalman.simple_kalman import KF1D
 from common.realtime import sec_since_boot
 from common.numpy_fast import clip, interp
 from selfdrive.swaglog import cloudlog
@@ -29,7 +29,7 @@ COST_E_DIM = 5
 COST_DIM = COST_E_DIM + 1
 CONSTR_DIM = 4
 
-X_EGO_OBSTACLE_COST = 3.
+X_EGO_OBSTACLE_COST = 5.
 X_EGO_COST = 0.
 V_EGO_COST = 0.
 A_EGO_COST = 0.
@@ -40,7 +40,7 @@ CRASH_DISTANCE = .5
 LIMIT_COST = 1e6
 
 
-# Less timestamps doesn't hurt performance and leads to
+# Fewer timestamps don't hurt performance and lead to
 # much better convergence of the MPC with low iterations
 N = 12
 MAX_T = 10.0
@@ -53,11 +53,11 @@ T_FOLLOW = 1.45
 COMFORT_BRAKE = 2.5
 STOP_DISTANCE = 6.0
 
-def get_stopped_equivalence_factor(v_lead):
-  return (v_lead**2) / (2 * COMFORT_BRAKE)
+def get_stopped_equivalence_factor(v_lead, v_ego):
+  return (v_lead*v_ego) / (2 * COMFORT_BRAKE)
 
 def get_safe_obstacle_distance(v_ego):
-  return (v_ego**2) / (2 * COMFORT_BRAKE) + T_FOLLOW * v_ego + STOP_DISTANCE
+  return (v_ego**2) / (2 * COMFORT_BRAKE) + 0. * v_ego + STOP_DISTANCE
 
 def desired_follow_distance(v_ego, v_lead):
   return get_safe_obstacle_distance(v_ego) - get_stopped_equivalence_factor(v_lead)
@@ -84,9 +84,9 @@ def gen_long_model():
   model.xdot = vertcat(x_ego_dot, v_ego_dot, a_ego_dot)
 
   # live parameters
-  x_obstacle = SX.sym('x_obstacle')
   a_min = SX.sym('a_min')
   a_max = SX.sym('a_max')
+  x_obstacle = SX.sym('x_obstacle')
   prev_a = SX.sym('prev_a')
   model.p = vertcat(a_min, a_max, x_obstacle, prev_a)
 
@@ -132,6 +132,7 @@ def gen_long_mpc_solver():
   # from an obstacle at every timestep. This obstacle can be a lead car
   # or other object. In e2e mode we can use x_position targets as a cost
   # instead.
+  # low speed, desired dist is more important
   costs = [((x_obstacle - x_ego) - (desired_dist_comfort)) / (v_ego + 10.),
            x_ego,
            v_ego,
@@ -143,11 +144,11 @@ def gen_long_mpc_solver():
 
   # Constraints on speed, acceleration and desired distance to
   # the obstacle, which is treated as a slack constraint so it
-  # behaves like an assymetrical cost.
-  constraints = vertcat((v_ego),
+  # behaves like an asymmetrical cost.
+  constraints = vertcat(v_ego,
                         (a_ego - a_min),
                         (a_max - a_ego),
-                        ((x_obstacle - x_ego) - (3/4) * (desired_dist_comfort)) / (v_ego + 10.))
+                        ((x_obstacle - x_ego) - ((50. - v_ego)/ 50.) * (desired_dist_comfort)) / (v_ego + 10.))
   ocp.model.con_h_expr = constraints
   ocp.model.con_h_expr_e = vertcat(np.zeros(CONSTR_DIM))
 
@@ -169,7 +170,7 @@ def gen_long_mpc_solver():
   ocp.constraints.idxsh = np.arange(CONSTR_DIM)
 
   # The HPIPM solver can give decent solutions even when it is stopped early
-  # Which is critical for our purpose where the compute time is strictly bounded
+  # Which is critical for our purpose where compute time is strictly bounded
   # We use HPIPM in the SPEED_ABS mode, which ensures fastest runtime. This
   # does not cause issues since the problem is well bounded.
   ocp.solver_options.qp_solver = 'PARTIAL_CONDENSING_HPIPM'
@@ -190,21 +191,29 @@ def gen_long_mpc_solver():
   return ocp
 
 
-class LongitudinalMpc():
+class LongitudinalMpc:
   def __init__(self, e2e=False):
     self.e2e = e2e
     self.reset()
-    self.accel_limit_arr = np.zeros((N+1, 2))
-    self.accel_limit_arr[:,0] = -1.2
-    self.accel_limit_arr[:,1] = 1.2
     self.source = SOURCES[2]
+    self.v_ego_kf = KF1D(x0=[[0.0], [0.0]],
+                         A=[[1.0, 0.05], [0.0, 1.0]],
+                         C=[1.0, 0.0],
+                         K=[[0.12287673], [0.29666309]])
+
+  def update_speed_kf(self, v_ego_raw):
+    if abs(v_ego_raw - self.v_ego_kf.x[0][0]) > 2.0:  # Prevent large accelerations when car starts at non zero speed
+      self.v_ego_kf.x = [[v_ego_raw], [0.0]]
+
+    v_ego_x = self.v_ego_kf.update(v_ego_raw)
+    return float(v_ego_x[0]), float(v_ego_x[1])
 
   def reset(self):
     self.solver = AcadosOcpSolverFast('long', N, EXPORT_DIR)
-    self.v_solution = [0.0 for i in range(N+1)]
-    self.a_solution = [0.0 for i in range(N+1)]
+    self.v_solution = np.zeros(N+1)
+    self.a_solution = np.zeros(N+1)
     self.prev_a = np.array(self.a_solution)
-    self.j_solution = [0.0 for i in range(N)]
+    self.j_solution = np.zeros(N)
     self.yref = np.zeros((N+1, COST_DIM))
     for i in range(N):
       self.solver.cost_set(i, "yref", self.yref[i])
@@ -218,12 +227,16 @@ class LongitudinalMpc():
     self.status = False
     self.crash_cnt = 0.0
     self.solution_status = 0
+    self.solve_time = 0.0
     self.x0 = np.zeros(X_DIM)
     self.set_weights()
 
   def set_weights(self):
     if self.e2e:
       self.set_weights_for_xva_policy()
+      self.params[:,0] = -10.
+      self.params[:,1] = 10.
+      self.params[:,2] = 1e5
     else:
       self.set_weights_for_lead_policy()
 
@@ -264,7 +277,8 @@ class LongitudinalMpc():
       self.x0[1] = v
       self.x0[2] = a
 
-  def extrapolate_lead(self, x_lead, v_lead, a_lead, a_lead_tau):
+  @staticmethod
+  def extrapolate_lead(x_lead, v_lead, a_lead, a_lead_tau):
     a_lead_traj = a_lead * np.exp(-a_lead_tau * (T_IDXS**2)/2.)
     v_lead_traj = np.clip(v_lead + np.cumsum(T_DIFFS * a_lead_traj), 0.0, 1e8)
     x_lead_traj = x_lead + np.cumsum(T_DIFFS * v_lead_traj)
@@ -313,17 +327,31 @@ class LongitudinalMpc():
     # To estimate a safe distance from a moving lead, we calculate how much stopping
     # distance that lead needs as a minimum. We can add that to the current distance
     # and then treat that as a stopped car/obstacle at this new distance.
-    lead_0_obstacle = lead_xv_0[:,0] + get_stopped_equivalence_factor(lead_xv_0[:,1])
-    lead_1_obstacle = lead_xv_1[:,0] + get_stopped_equivalence_factor(lead_xv_1[:,1])
+    if carstate.drvrSetDistLvl == 3:
+      ts = 1.8
+    elif carstate.drvrSetDistLvl == 2:
+      ts = 1.5
+    elif carstate.drvrSetDistLvl == 1:
+      ts = 1.2
+
+
+    lead_0_obstacle = lead_xv_0[:,0] + get_stopped_equivalence_factor(lead_xv_0[:,1], v_ego) - v_ego*ts
+    lead_1_obstacle = lead_xv_1[:,0] + get_stopped_equivalence_factor(lead_xv_1[:,1], v_ego) - v_ego*ts
 
     # Fake an obstacle for cruise, this ensures smooth acceleration to set speed
     # when the leads are no factor.
-    v_lower = v_ego + (T_IDXS * self.cruise_min_a * 1.05)
-    v_upper = v_ego + (T_IDXS * self.cruise_max_a * 1.05)
+    v_lower = v_ego + (T_IDXS * self.cruise_min_a * 1.05)*0.8
+
+    k_x = [0, 5, 10, 20, 30]
+    k_y = [2.5, 1.5, 0.8, 0.8, 0.8]
+    kk = interp(v_ego, k_x, k_y)
+    v_upper = v_ego + (T_IDXS * self.cruise_max_a * 1.05)*kk
     v_cruise_clipped = np.clip(v_cruise * np.ones(N+1),
                                v_lower,
                                v_upper)
     cruise_obstacle = np.cumsum(T_DIFFS * v_cruise_clipped) + get_safe_obstacle_distance(v_cruise_clipped)
+
+
 
     x_obstacles = np.column_stack([lead_0_obstacle, lead_1_obstacle, cruise_obstacle])
     self.source = SOURCES[np.argmin(x_obstacles[0])]
@@ -347,21 +375,19 @@ class LongitudinalMpc():
     for i in range(N):
       self.solver.cost_set(i, "yref", self.yref[i])
     self.solver.cost_set(N, "yref", self.yref[N][:COST_E_DIM])
-    self.accel_limit_arr[:,0] = -10.
-    self.accel_limit_arr[:,1] = 10.
-    x_obstacle = 1e5*np.ones((N+1))
-    self.params = np.concatenate([self.accel_limit_arr,
-                             x_obstacle[:,None],
-                             self.prev_a[:,None]], axis=1)
+    self.params[:,3] = np.copy(self.prev_a)
     self.run()
-
 
   def run(self):
     for i in range(N+1):
       self.solver.set(i, 'p', self.params[i])
     self.solver.constraints_set(0, "lbx", self.x0)
     self.solver.constraints_set(0, "ubx", self.x0)
+
+    t = sec_since_boot()
     self.solution_status = self.solver.solve()
+    self.solve_time = sec_since_boot() - t
+
     for i in range(N+1):
       self.x_sol[i] = self.solver.get(i, 'x')
     for i in range(N):
@@ -373,12 +399,10 @@ class LongitudinalMpc():
 
     self.prev_a = np.interp(T_IDXS + 0.05, T_IDXS, self.a_solution)
 
-    t = sec_since_boot()
     if self.solution_status != 0:
       if t > self.last_cloudlog_t + 5.0:
         self.last_cloudlog_t = t
-        cloudlog.warning("Long mpc reset, solution_status: %s" % (
-                          self.solution_status))
+        cloudlog.warning(f"Long mpc reset, solution_status: {self.solution_status}")
       self.reset()
 
 
